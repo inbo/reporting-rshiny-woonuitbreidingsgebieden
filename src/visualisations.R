@@ -47,11 +47,12 @@ get_landuse_data <- function(xls_file, id_wug){
 
     # get landuse WUG
     lu_wug <- readxl::read_excel(path = xls_file,
-                                 sheet = "LG_WUG_%")  # NEED % (!)
-    wug <- lu_wug %>%
-        filter(lu_wug$`WUG-NR` == id_wug) %>%
+                                 sheet = "LG_WUG_%")
+    wuglu <- lu_wug %>%
+        filter(lu_wug$`WUG-NR` %in% id_wug) %>%
         select(2:19)
-    wug$type <- "WUG"
+    print(wuglu)
+    wuglu$type <- "WUG"
 
     # get landuse municipality
     lu_gemeente <- readxl::read_excel(path = xls_file,
@@ -71,7 +72,7 @@ get_landuse_data <- function(xls_file, id_wug){
     provincie$type <- paste("Provincie\n", location_info$Provincie)
 
     # combine to a single data table
-    lu_data <- bind_rows(wug, gemeente, provincie)
+    lu_data <- bind_rows(wuglu, gemeente, provincie)
     lu_data <- gather(lu_data, landuse, area, -type)
 
     lu_data$landuse <- factor(lu_data$landuse,

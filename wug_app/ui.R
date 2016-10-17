@@ -18,15 +18,16 @@ shinyUI(fluidPage(
   sidebarLayout(
 
       sidebarPanel(
-          selectInput(
-              inputId = "wug",
-              label = "WUG code:",
-              choices = list("11002_02", "11002_04",
-                             "73107_26", "37007_01",
-                             "41024_01", "33021_10",
-                             "23086_05", "71024_01",
-                             "46021_08")  #ids_list  #selected = ids_list[1]
-          )
+          uiOutput("wuglist")
+          # selectInput(
+          #     inputId = "wug",
+          #     label = "WUG code:",
+          #     choices = list("11002_02", "11002_04",
+          #                    "73107_26", "37007_01",
+          #                    "41024_01", "33021_10",
+          #                    "23086_05", "71024_01",
+          #                    "46021_08")  #ids_list  #selected = ids_list[1]
+          # )
       ),
 
       mainPanel(

@@ -51,8 +51,7 @@ get_landuse_data <- function(xls_file, id_wug){
     wuglu <- lu_wug %>%
         filter(lu_wug$`WUG-NR` %in% id_wug) %>%
         select(2:19)
-    print(wuglu)
-    wuglu$type <- "WUG"
+    wuglu$type <- paste("WUG\n", id_wug)
 
     # get landuse municipality
     lu_gemeente <- readxl::read_excel(path = xls_file,
@@ -84,7 +83,7 @@ get_landuse_data <- function(xls_file, id_wug){
                                          "Militaire voorziening", "Haven", "Water", "Moeras"),
                               ordered = TRUE)
     lu_data$type <- factor(lu_data$type,
-                           levels = c("WUG",
+                           levels = c(paste("WUG\n", id_wug),
                                       location_info$GEMEENTE,
                                       paste("Provincie\n", location_info$Provincie)),
                            ordered = TRUE)
@@ -180,16 +179,10 @@ get_esd_data <- function(xls_file, id_wug){
 # PLOT FUNCTIONS
 
 # OPTIES VOOR DE VISUALISATIE VAN DE PERCENTAGES
-#create_pie <- function(){}
-
 create_stacked_bar <- function(lu_data){
-
-    print(lu_data$landuse)
-
+    # arrange the data order to fit the legend order
     lu_data <- lu_data %>%
                     arrange(desc(landuse))
-    print(lu_data$landuse)
-
     cbPalette <- c("Bos" = "#006d2c",
                    "Grasland" = "#31a354",
                    "Halfnatuurlijk grasland" = "#74c476",
@@ -221,14 +214,6 @@ create_stacked_bar <- function(lu_data){
     return(barp)
 }
 
-# cehck for styling: http://t-redactyl.io/blog/2016/01/creating-plots-in-r-using-ggplot2-part-4-stacked-bar-plots.html
-
-#create_tufte_table <- function(){}
-
-# UNICITEIT VAN HET LANGEBRUIK MEEGEVEN
-
-# ???
-
 #' Plot an interactive radar/spider-chart of the ESD data towards a given
 #' reference
 #'
@@ -254,7 +239,6 @@ create_radar <- function(ESD_data, reference, threshold = 0.5){
                        49, 163, 84,
                        217, 95, 14), nrow = 3, ncol = 3)
 
-    # TODO: HOW TO CONTROL SEQUENCE?!?
     radar <- chartJSRadar(current_sel,
                  responsive = TRUE,
                  showToolTipLabel = TRUE,

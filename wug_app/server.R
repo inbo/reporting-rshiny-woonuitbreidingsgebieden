@@ -20,21 +20,31 @@ xls_file <- "../data/Afwegingskader_Wug_versie2.xlsx"
 
 info_wug_ids <- readxl::read_excel(path = xls_file, sheet = "Info_Wug")
 ids_list <-  as.list(get_wug_ids(info_wug_ids))
+province_list <- as.list(unique(info_wug$Provincie))
 
 shinyServer(function(input, output) {
 
-    print(dim(ids_list))
+    # output$provinces <- renderUI({
+    #     selectInput(
+    #         inputId = "province",
+    #         label = "Provincie:",
+    #         choices = province_list
+    #     )
+    # })
+
+    # ids_list <- reactive(
+    #                 get_wug_ids(info_wug_ids)
+    #
+    #                 )
+
     output$wuglist <- renderUI({
-        selectInput(
+        selectizeInput(
             inputId = "wug",
             label = "WUG code:",
             choices = ids_list,
-            # choices = list("11002_02", "11002_04",
-            #                "73107_26", "37007_01",
-            #                "41024_01", "33021_10",
-            #                "23086_05", "71024_01",
-            #                "46021_08"),  #id,s_list  #selected = ids_list[1]
-            selected = "11002_02"
+            options = list(
+                placeholder = 'Geef de WUG code in',
+                maxOptions = 1900)
         )
     })
 

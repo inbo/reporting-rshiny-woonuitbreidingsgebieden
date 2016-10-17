@@ -18,6 +18,7 @@ shinyUI(fluidPage(
   sidebarLayout(
 
       sidebarPanel(
+          #uiOutput("provinces"),
           uiOutput("wuglist")
           # selectInput(
           #     inputId = "wug",

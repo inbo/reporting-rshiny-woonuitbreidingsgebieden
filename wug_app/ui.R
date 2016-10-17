@@ -51,3 +51,9 @@ shinyUI(fluidPage(
           )
       )
 ))
+
+# IDEE ivm landgebruik voorstelling:
+# op ha-niveau (niet %) nagaan wat het verlies van landgebruik is
+
+
+

@@ -1,0 +1,7 @@
+name: "woonuitbreidingsgebieden"
+output_dir: "."
+navbar:
+  title: "Tutorial woonuitbreidingsgebieden"
+  left:
+    - text: "Tutorial"
+      href: handleiding.html

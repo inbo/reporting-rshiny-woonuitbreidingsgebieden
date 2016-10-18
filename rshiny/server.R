@@ -11,7 +11,11 @@ library(shiny)
 library(INBOtheme)
 library(radarchart)
 
-source("../src/visualisations.R")
+source('../src/support.R')
+source("../src/get_esd_data.R")
+source("../src/get_landuse_data.R")
+source("../src/create_radar.R")
+source("../src/create_stacked_bar.R")
 
 # extract data
 xls_file <- "../data/Afwegingskader_Wug_versie2.xlsx"
@@ -66,4 +70,3 @@ shinyServer(function(input, output) {
         else {paste(base_string, input$wug)}
         })
 })
-

@@ -8,6 +8,7 @@
 library(dplyr)
 library(tidyr)
 
+
 # WUG AREA
 
 id_wug <- "11002_02"

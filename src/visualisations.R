@@ -6,7 +6,6 @@ library(tidyr)
 
 # DATA PROCESSING FUNCTIONS
 
-
 #' get from link-table containing an overview of the WUG-NR - Provincie -
 #' GEMEENTE relation the corresponding province and municipality based on the
 #' WUG identifier
@@ -16,6 +15,7 @@ library(tidyr)
 get_locations <- function(link_table, id_wug){
     return(link_table[link_table$`WUG-NR` == id_wug, c(1, 3:5)])
 }
+
 
 #' get from link-table containing an overview of the WUG-NR - Provincie -
 #' GEMEENTE relation the corresponding province and municipality based on the
@@ -209,8 +209,8 @@ create_stacked_bar <- function(lu_data){
 
                 xlab("") +
                 ylab("Oppervlakte %") +
-                theme_inbo2015(base_size = 14) +
-                theme(axis.text = element_text((size = 15)))
+                theme_inbo2015(base_size = 16) +
+                theme(axis.text = element_text((size = 16)))
     return(barp)
 }
 
@@ -248,7 +248,7 @@ create_radar <- function(ESD_data, reference, threshold = 0.5){
     return(radar)
 }
 
-# Documentation:
+# Documentation radar charts:
 # https://cran.r-project.org/web/packages/fmsb/fmsb.pdf -> http://www.r-graph-gallery.com/142-basic-radar-chart/
 # http://personality-project.org/r/html/spider.html
 # https://github.com/mangothecat/radarchart

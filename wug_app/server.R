@@ -13,7 +13,6 @@ library(radarchart)
 
 source("../src/visualisations.R")
 
-
 # extract data
 xls_file <- "../data/Afwegingskader_Wug_versie2.xlsx"
 info_wug_ids <- readxl::read_excel(path = xls_file, sheet = "Info_Wug")

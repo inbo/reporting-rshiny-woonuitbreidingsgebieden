@@ -15,10 +15,10 @@ library(INBOtheme)
 #'@param lu_data tidy version of the landuse data representation
 #'
 #'@return ggplot barplot
-create_stacked_bar <- function(lu_data){
-    # arrange the data order to fit the legend order
-    lu_data <- lu_data %>%
+create_loss_bar <- function(lu_data_ha){
+    lu_data_ha <- lu_data_ha %>%
         arrange(desc(landuse))
+
     cbPalette <- c("Bos" = "#006d2c",
                    "Grasland" = "#31a354",
                    "Halfnatuurlijk grasland" = "#74c476",
@@ -38,13 +38,20 @@ create_stacked_bar <- function(lu_data){
                    "Water" = "#9ecae1",
                    "Moeras" = "#deebf7")
 
-    barp <- ggplot(lu_data, aes(y = area, fill = landuse)) +
-        geom_bar(stat = 'identity', aes(x = type)) +
+    ggplot(lu_data_ha, aes(x = landuse, y = pt_loss, fill = landuse)) +
+        geom_bar(stat = "identity") +
         scale_fill_manual(name = "Landgebruik",
+                          breaks = levels(lu_data_ha$landuse),
                           values = cbPalette) +
+        #geom_text(aes(y = -0.1, label = sprintf("%2.2f", pt_loss),
+        #              hjust = -0.1),
+        #          size = 5) +
+        scale_x_discrete(limits = unique(lu_data_ha$landuse)) +
+        coord_flip() +
+        ylab("Verlies aan oppervlakte (%)") +
         xlab("") +
-        ylab("Oppervlakte %") +
         theme_inbo2015(base_size = 16) +
         theme(axis.text = element_text((size = 16)))
-    return(barp)
+
+    # http://stackoverflow.com/questions/26853926/positioning-labels-on-geom-bar
 }

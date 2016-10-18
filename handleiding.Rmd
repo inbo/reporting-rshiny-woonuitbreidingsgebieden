@@ -42,7 +42,7 @@ xls_file <- "data/Afwegingskader_Wug_versie2.xlsx"
 To create the landuse plots, load the landuse data:
 
 ```{r landuse_load}
-lu_data <- get_landuse_data(xls_file, id_wug)
+lu_data <- get_landuse_percent(xls_file, id_wug)
 ```
 
 and create the graph:

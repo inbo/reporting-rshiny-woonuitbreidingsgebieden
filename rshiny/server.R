@@ -41,10 +41,10 @@ shinyServer(function(input, output) {
     # create landuse figure
     lu_data <- reactive({
                     if (is.null(input$wug)) {
-                        get_landuse_data(xls_file, ids_list[1])}
+                        get_landuse_data_pt(xls_file, ids_list[1])}
                     else if (input$wug == '') {
-                        get_landuse_data(xls_file, ids_list[1])}
-                    else {get_landuse_data(xls_file, input$wug)}
+                        get_landuse_data_pt(xls_file, ids_list[1])}
+                    else {get_landuse_data_pt(xls_file, input$wug)}
                     })
     output$barlu <- renderPlot({
                         create_stacked_bar(lu_data())

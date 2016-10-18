@@ -13,33 +13,57 @@ library(radarchart)
 
 source("../src/visualisations.R")
 
-
 # extract data
-xls_file <- "Afwegingskader_Wug_versie2.xlsx"
+xls_file <- "../data/Afwegingskader_Wug_versie2.xlsx"
 info_wug_ids <- readxl::read_excel(path = xls_file, sheet = "Info_Wug")
-ids_list <-  as.list(get_wug_ids(info_wug_ids)[1:10])
+ids_list <-  as.list(get_wug_ids(info_wug_ids))
+#province_list <- as.list(unique(info_wug$Provincie))
 
 shinyServer(function(input, output) {
 
-    # output$wuglist <- renderUI({
-    #     selectInput(
-    #         inputId = "wug",
-    #         label = "WUG code:",
-    #         choices = list("11002_02", "11002_04", "73107_26")  #ids_list  #selected = ids_list[1]
-    #     )
-    # })
+    output$wuglist <- renderUI({
+        selectizeInput(
+            inputId = "wug",
+            label = "WUG code:",
+            choices = ids_list,
+            selected = NULL,
+            options = list(
+                placeholder = 'Geef de WUG code in',
+                maxOptions = 1900,
+                onInitialize = I('function() { this.setValue(""); }'))
+        )
+    })
 
-    # create figure
+    # create landuse figure
+    lu_data <- reactive({
+                    if (is.null(input$wug)) {
+                        get_landuse_data(xls_file, ids_list[1])}
+                    else if (input$wug == '') {
+                        get_landuse_data(xls_file, ids_list[1])}
+                    else {get_landuse_data(xls_file, input$wug)}
+                    })
     output$barlu <- renderPlot({
-        lu_data <- reactive({get_landuse_data(xls_file, input$wug)})
-        create_stacked_bar(lu_data())
-        })
+                        create_stacked_bar(lu_data())
+                        })
 
     # create the radar chart
-    ESD_data <- reactive({get_esd_data(xls_file, input$wug)})
-
+    ESD_data <- reactive({
+                    if (is.null(input$wug) | input$wug == '') {
+                        get_esd_data(xls_file, ids_list[1])}
+                    else {get_esd_data(xls_file, input$wug)}
+                    })
     output$radar <- renderChartJSRadar({
         create_radar(ESD_data(), input$ref)
+        })
+
+    # Provide current WUG
+    output$wug_display <- renderText({
+        base_string <- "Huidige visualisatie: WUG"
+        if (is.null(input$wug)) {
+            paste(base_string, ids_list[1])}
+        else if (input$wug == '') {
+            paste(base_string, ids_list[1])}
+        else {paste(base_string, input$wug)}
         })
 })
 

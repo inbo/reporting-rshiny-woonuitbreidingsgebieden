@@ -6,7 +6,6 @@ library(tidyr)
 
 # DATA PROCESSING FUNCTIONS
 
-
 #' get from link-table containing an overview of the WUG-NR - Provincie -
 #' GEMEENTE relation the corresponding province and municipality based on the
 #' WUG identifier
@@ -16,6 +15,7 @@ library(tidyr)
 get_locations <- function(link_table, id_wug){
     return(link_table[link_table$`WUG-NR` == id_wug, c(1, 3:5)])
 }
+
 
 #' get from link-table containing an overview of the WUG-NR - Provincie -
 #' GEMEENTE relation the corresponding province and municipality based on the
@@ -47,11 +47,11 @@ get_landuse_data <- function(xls_file, id_wug){
 
     # get landuse WUG
     lu_wug <- readxl::read_excel(path = xls_file,
-                                 sheet = "LG_WUG_%")  # NEED % (!)
-    wug <- lu_wug %>%
-        filter(lu_wug$`WUG-NR` == id_wug) %>%
+                                 sheet = "LG_WUG_%")
+    wuglu <- lu_wug %>%
+        filter(lu_wug$`WUG-NR` %in% id_wug) %>%
         select(2:19)
-    wug$type <- "WUG"
+    wuglu$type <- paste("WUG\n", id_wug)
 
     # get landuse municipality
     lu_gemeente <- readxl::read_excel(path = xls_file,
@@ -71,7 +71,7 @@ get_landuse_data <- function(xls_file, id_wug){
     provincie$type <- paste("Provincie\n", location_info$Provincie)
 
     # combine to a single data table
-    lu_data <- bind_rows(wug, gemeente, provincie)
+    lu_data <- bind_rows(wuglu, gemeente, provincie)
     lu_data <- gather(lu_data, landuse, area, -type)
 
     lu_data$landuse <- factor(lu_data$landuse,
@@ -83,7 +83,7 @@ get_landuse_data <- function(xls_file, id_wug){
                                          "Militaire voorziening", "Haven", "Water", "Moeras"),
                               ordered = TRUE)
     lu_data$type <- factor(lu_data$type,
-                           levels = c("WUG",
+                           levels = c(paste("WUG\n", id_wug),
                                       location_info$GEMEENTE,
                                       paste("Provincie\n", location_info$Provincie)),
                            ordered = TRUE)
@@ -179,10 +179,10 @@ get_esd_data <- function(xls_file, id_wug){
 # PLOT FUNCTIONS
 
 # OPTIES VOOR DE VISUALISATIE VAN DE PERCENTAGES
-#create_pie <- function(){}
-
 create_stacked_bar <- function(lu_data){
-
+    # arrange the data order to fit the legend order
+    lu_data <- lu_data %>%
+                    arrange(desc(landuse))
     cbPalette <- c("Bos" = "#006d2c",
                    "Grasland" = "#31a354",
                    "Halfnatuurlijk grasland" = "#74c476",
@@ -209,18 +209,10 @@ create_stacked_bar <- function(lu_data){
 
                 xlab("") +
                 ylab("Oppervlakte %") +
-                theme_inbo2015(base_size = 14) +
-                theme(axis.text = element_text((size = 15)))
+                theme_inbo2015(base_size = 16) +
+                theme(axis.text = element_text((size = 16)))
     return(barp)
 }
-
-# cehck for styling: http://t-redactyl.io/blog/2016/01/creating-plots-in-r-using-ggplot2-part-4-stacked-bar-plots.html
-
-#create_tufte_table <- function(){}
-
-# UNICITEIT VAN HET LANGEBRUIK MEEGEVEN
-
-# ???
 
 #' Plot an interactive radar/spider-chart of the ESD data towards a given
 #' reference
@@ -243,21 +235,20 @@ create_radar <- function(ESD_data, reference, threshold = 0.5){
     # round the numbers for improved visualisation
     current_sel[,-1] <- round(current_sel[,-1], 2)
 
-    colors <- matrix(c(200, 200, 200,
+    colors <- matrix(c(128, 0, 0, ## versus200, 200, 200,
                        49, 163, 84,
                        217, 95, 14), nrow = 3, ncol = 3)
 
-    # TODO: HOW TO CONTROL SEQUENCE?!?
     radar <- chartJSRadar(current_sel,
                  responsive = TRUE,
                  showToolTipLabel = TRUE,
-                 polyAlpha = 0.3,
+                 polyAlpha = 0.0,  # 0.3
                  colMatrix = colors,
                  addDots = FALSE)
     return(radar)
 }
 
-# Documentation:
+# Documentation radar charts:
 # https://cran.r-project.org/web/packages/fmsb/fmsb.pdf -> http://www.r-graph-gallery.com/142-basic-radar-chart/
 # http://personality-project.org/r/html/spider.html
 # https://github.com/mangothecat/radarchart

@@ -108,10 +108,11 @@ get_landuse_data_ha <- function(xls_file, id_wug){
 
     # select only the relevant landuses
     wug_ha <- lu_data_ha %>% filter(landuse %in% wug_landuses$landuse)
+    wug_ha$type <- factor(wug_ha$type,
+                          levels = c(wug_name,
+                                     gemeente_name),
+                          ordered = TRUE)
     wug_ha <- spread(wug_ha, key = "type", value = "area")
-
-    # derive percentage loss
-    wug_ha["pt_loss"] <- 100. - (wug_ha[,2] - wug_ha[,3])*100./wug_ha[,2]
 
     wug_ha$landuse <- factor(wug_ha$landuse,
                              levels = c("Bos", "Grasland", "Halfnatuurlijk grasland",
@@ -121,6 +122,8 @@ get_landuse_data_ha <- function(xls_file, id_wug){
                                         "Urbaan onbebouwd", "Infrastructuur", "Industrie",
                                         "Militaire voorziening", "Haven", "Water", "Moeras"),
                              ordered = TRUE)
+    # derive percentage loss
+    wug_ha["pt_loss"] <- 100. - (wug_ha[,3] - wug_ha[,2])*100./wug_ha[,3]
 
     return(wug_ha)
 }

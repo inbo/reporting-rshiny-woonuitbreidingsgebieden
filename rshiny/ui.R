@@ -24,9 +24,16 @@ shinyUI(fluidPage(
 
       mainPanel(
           tabsetPanel(
-              tabPanel("Landgebruik", plotOutput("barlu",
-                                                 width = "600",
-                                                 height = "600")),
+              tabPanel("Landgebruik",
+                           h2('Procentuele oppervlakte landgebruik'),
+                           plotOutput("barlu",
+                                      width = "600",
+                                      height = "600"),
+                           h2('Procentuele verlies oppervlakte landgebruik in gemeente'),
+                           plotOutput("barloss",
+                                      width = "600",
+                                      height = "600")
+                       ),
               tabPanel("Ecosysteemdiensten",
                        wellPanel(
                            selectInput("ref", "Vergelijk met:",

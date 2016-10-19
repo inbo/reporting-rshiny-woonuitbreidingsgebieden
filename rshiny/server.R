@@ -16,6 +16,7 @@ source("../src/get_esd_data.R")
 source("../src/get_landuse_data.R")
 source("../src/create_radar.R")
 source("../src/create_stacked_bar.R")
+source("../src/create_loss_bar.R")
 
 # extract data
 xls_file <- "../data/Afwegingskader_Wug_versie2.xlsx"
@@ -38,7 +39,7 @@ shinyServer(function(input, output) {
         )
     })
 
-    # create landuse figure
+    # create landuse figure percentages
     lu_data <- reactive({
                     if (is.null(input$wug)) {
                         get_landuse_data_pt(xls_file, ids_list[1])}
@@ -49,6 +50,17 @@ shinyServer(function(input, output) {
     output$barlu <- renderPlot({
                         create_stacked_bar(lu_data())
                         })
+    # create landuse figure percentage loss municipality
+    lu_data_ha <- reactive({
+        if (is.null(input$wug)) {
+            get_landuse_data_ha(xls_file, ids_list[1])}
+        else if (input$wug == '') {
+            get_landuse_data_ha(xls_file, ids_list[1])}
+        else {get_landuse_data_ha(xls_file, input$wug)}
+    })
+    output$barloss <- renderPlot({
+        create_loss_bar(lu_data_ha())
+    })
 
     # create the radar chart
     ESD_data <- reactive({

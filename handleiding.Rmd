@@ -22,6 +22,7 @@ source("src/get_esd_data.R")
 source("src/get_landuse_data.R")
 source("src/create_radar.R")
 source("src/create_stacked_bar.R")
+source("src/create_loss_bar.R")
 ```
 
 On the one hand, the `get_*` functions are created to extract the data from the data source (excel-file). On the other hand, the `create_*` functions are used to make the graphs. The `support.R` script provide some additional help functions.
@@ -39,20 +40,29 @@ xls_file <- "data/Afwegingskader_Wug_versie2.xlsx"
 
 ### Comparison percentage of area
 
-To create the landuse plots, load the landuse data:
+To create the landuse plot, load the landuse data as percentages:
 
-```{r landuse_load}
-lu_data <- get_landuse_data(xls_file, id_wug)
+```{r landuse_load_pt}
+lu_data <- get_landuse_data_pt(xls_file, id_wug)
 ```
 
 and create the graph:
-```{r landuse_plot}
+```{r landuse_plot_stack}
 create_stacked_bar(lu_data)
 ```
 
 ### Relative loss in the municipality
 
-TODO
+To create the landuse relative loss plot, load the landuse data as ha:
+
+```{r landuse_load_ha}
+lu_data_ha <- get_landuse_data_ha(xls_file, id_wug)
+```
+
+and create the graph:
+```{r landuse_plot_loss}
+create_loss_bar(lu_data_ha)
+```
 
 ## Ecosystem services adar chart
 

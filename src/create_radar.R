@@ -38,6 +38,10 @@ create_radar <- function(ESD_data, reference, threshold = 0.5){
                           showToolTipLabel = TRUE,
                           polyAlpha = 0.0,  # 0.3
                           colMatrix = colors,
-                          addDots = FALSE)
+                          addDots = FALSE,
+                          maxScale = 1.,
+                          scaleStartValue = 0.0,
+                          scaleStepWidth = 0.25
+                          )
     return(radar)
 }

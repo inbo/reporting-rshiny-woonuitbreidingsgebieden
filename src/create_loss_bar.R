@@ -36,3 +36,9 @@ create_loss_bar <- function(lu_data_ha){
 
     # http://stackoverflow.com/questions/26853926/positioning-labels-on-geom-bar
 }
+
+# Alternatief idee: Plot gewoon de oppervlakte relatief in elkaar:
+# lichtgekleurd de gemeente-oppervlakte als een volle balk (representatie 100%)
+# daarop donkerder de WUG: het percentage van dat landgebruik dat ingenomen is
+# Hoe meer overlap: hoe meer impact!
+

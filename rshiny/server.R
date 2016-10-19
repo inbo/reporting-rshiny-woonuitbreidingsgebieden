@@ -74,11 +74,22 @@ shinyServer(function(input, output) {
 
     # Provide current WUG
     output$wug_display <- renderText({
-        base_string <- "Huidige visualisatie: WUG"
+        base_string <- "Ecosysteemdiensten WUG"
         if (is.null(input$wug)) {
             paste(base_string, ids_list[1])}
         else if (input$wug == '') {
             paste(base_string, ids_list[1])}
         else {paste(base_string, input$wug)}
         })
+    # Provide current municipality
+    output$gemeente_display <- renderText({
+        base_string <- "Procentueel verlies oppervlakte landgebruik"
+        if (is.null(input$wug)) {
+            base_string}
+        else if (input$wug == '') {
+            base_string}
+        else {paste(base_string, "in", names(lu_data_ha())[3])}
+    })
+
+
 })

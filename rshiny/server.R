@@ -19,7 +19,7 @@ source("../src/create_stacked_bar.R")
 source("../src/create_loss_bar.R")
 
 # extract data
-xls_file <- "../data/Afwegingskader_Wug_versie2.xlsx"
+xls_file <- "../data/Afwegingskader_Wug.xlsx"
 info_wug_ids <- readxl::read_excel(path = xls_file, sheet = "Info_Wug")
 ids_list <-  as.list(get_wug_ids(info_wug_ids))
 #province_list <- as.list(unique(info_wug$Provincie))

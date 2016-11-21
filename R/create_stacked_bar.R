@@ -12,14 +12,14 @@
 #'
 #' @return ggplot barplot
 #' @export
-#' @importFrom dplyr %>% arrange desc
+#' @importFrom dplyr %>% arrange_ desc
 #' @importFrom ggplot2 ggplot geom_bar scale_fill_manual
 #'     ylab xlab theme aes
 #' @importFrom INBOtheme theme_inbo2015
 create_stacked_bar <- function(lu_data){
-    # arrange the data order to fit the legend order
+    # arrange_ the data order to fit the legend order
     lu_data <- lu_data %>%
-        arrange(desc(landuse))
+        arrange_(desc(landuse))
 
     barp <- ggplot(lu_data, aes(y = area, fill = landuse)) +
         geom_bar(stat = 'identity', aes(x = type)) +

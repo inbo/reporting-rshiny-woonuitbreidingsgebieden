@@ -22,7 +22,7 @@
 #'
 #' @export
 #' @importFrom readxl read_excel
-#' @importFrom dplyr %>% filter select bind_rows
+#' @importFrom dplyr %>% filter_ select bind_rows
 #' @importFrom tidyr gather
 get_esd_data <- function(xls_file, id_wug){
 
@@ -35,7 +35,7 @@ get_esd_data <- function(xls_file, id_wug){
     esd_wug <- read_excel(path = xls_file,
                           sheet = "ESD_Wug")
     wug <- esd_wug %>%
-        filter(esd_wug$NR_WUG == id_wug) %>%
+        filter_(esd_wug$NR_WUG == id_wug) %>%
         select(6:21)
     wug$type <- "wug"
 
@@ -43,7 +43,7 @@ get_esd_data <- function(xls_file, id_wug){
     esd_gemeente <- read_excel(path = xls_file,
                                sheet = "ESD_Gemeente")
     gemeente <- esd_gemeente %>%
-        filter(esd_gemeente$Gemeente == location_info$GEMEENTE) %>%
+        filter_(esd_gemeente$Gemeente == location_info$GEMEENTE) %>%
         select(3:18)
     gemeente$type <- "gemeente"
 
@@ -58,7 +58,7 @@ get_esd_data <- function(xls_file, id_wug){
     esd_wug_gemeente <- read_excel(path = xls_file,
                                    sheet = "ESD_Wug_Gemeente")
     wug_gemeente <- esd_wug_gemeente %>%
-        filter(esd_wug_gemeente$Gemeente == location_info$GEMEENTE) %>%
+        filter_(esd_wug_gemeente$Gemeente == location_info$GEMEENTE) %>%
         select(2:17)
     wug_gemeente$type <- "wug_gemeente"
 
@@ -66,7 +66,7 @@ get_esd_data <- function(xls_file, id_wug){
     esd_wug_provincie <- read_excel(path = xls_file,
                                     sheet = "ESD_Wug_Provincie")
     wug_provincie <- esd_wug_provincie %>%
-        filter(esd_wug_provincie$Provincie == location_info$Provincie) %>%
+        filter_(esd_wug_provincie$Provincie == location_info$Provincie) %>%
         select(3:18)
     wug_provincie$type <- "wug_provincie"
 

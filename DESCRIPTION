@@ -1,0 +1,11 @@
+Package: woonuitbreidingsgebieden
+Type: Package
+Title: Rshiny app visualizations woonuitbreidingsgebieden
+Version: 0.1.0
+Author: Stijn Van Hoey
+Maintainer: Stijn Van Hoey <stijn.vanhoey@inbo.be>
+Description: Visualization of landuse and ecosystem services of the individual
+    woonuitbreidingsgebieden of Flanders
+License: BSD-3
+Encoding: UTF-8
+LazyData: true

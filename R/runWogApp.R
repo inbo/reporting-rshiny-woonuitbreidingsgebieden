@@ -10,5 +10,5 @@ run_wog <- function() {
              Try re-installing `mypackage`.", call. = FALSE)
     }
 
-    runApp(appDir, display.mode = "normal")
+    runApp(appDir)
 }

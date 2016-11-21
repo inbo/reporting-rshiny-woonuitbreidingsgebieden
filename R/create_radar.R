@@ -9,7 +9,7 @@
 #' reference
 #'
 #' @param ESD_data tidy version of the ESD data representation
-#' @param char choose an option from: wug, gemeente, vlaanderen,
+#' @param reference char choose an option from: wug, gemeente, vlaanderen,
 #'     wug_gemeente, wug_provincie, wug_vlaanderen
 #' @param threshold provide the value on which a red threshold line should be
 #'     provided

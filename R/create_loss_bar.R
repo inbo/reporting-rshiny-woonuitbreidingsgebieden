@@ -33,9 +33,9 @@ create_loss_bar <- function(lu_data_ha){
         scale_x_discrete(limits = unique(lu_data_ha$landuse)) +
         coord_flip() +
         ylab("Verlies aan oppervlakte (%)") +
-        xlab("") +
-        theme_inbo2015(base_size = 16) +
-        theme(axis.text = element_text((size = 16)))
+        xlab("") # +
+        #theme_inbo2015(base_size = 16) +
+        #theme(axis.text = element_text((size = 16)))
 }
 
 

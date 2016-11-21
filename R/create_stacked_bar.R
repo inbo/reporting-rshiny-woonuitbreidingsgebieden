@@ -5,20 +5,21 @@
 # INBO
 #
 
-library(dplyr)
-library(ggplot2)
-library(INBOtheme)
-
 #' Plot an stacked graph of the relative percentages of landuse in each of the
 #' spatial entities: WUG, municipality and province
 #'
-#'@param lu_data tidy version of the landuse data representation
+#' @param lu_data tidy version of the landuse data representation
 #'
-#'@return ggplot barplot
+#' @return ggplot barplot
+#' @export
+#' @importFrom dplyr %>% arrange_ desc
+#' @importFrom ggplot2 ggplot geom_bar scale_fill_manual
+#'     ylab xlab theme aes
+#' @importFrom INBOtheme theme_inbo2015
 create_stacked_bar <- function(lu_data){
-    # arrange the data order to fit the legend order
+    # arrange_ the data order to fit the legend order
     lu_data <- lu_data %>%
-        arrange(desc(landuse))
+        arrange_(desc(landuse))
 
     barp <- ggplot(lu_data, aes(y = area, fill = landuse)) +
         geom_bar(stat = 'identity', aes(x = type)) +

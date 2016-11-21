@@ -10,11 +10,11 @@ create_radar(ESD_data, reference, threshold = 0.5)
 \arguments{
 \item{ESD_data}{tidy version of the ESD data representation}
 
+\item{reference}{char choose an option from: wug, gemeente, vlaanderen,
+wug_gemeente, wug_provincie, wug_vlaanderen}
+
 \item{threshold}{provide the value on which a red threshold line should be
 provided}
-
-\item{char}{choose an option from: wug, gemeente, vlaanderen,
-wug_gemeente, wug_provincie, wug_vlaanderen}
 }
 \description{
 Plot an interactive radar/spider-chart of the ESD data towards a given

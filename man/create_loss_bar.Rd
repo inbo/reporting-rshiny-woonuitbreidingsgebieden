@@ -8,7 +8,7 @@ spatial entities: WUG, municipality and province}
 create_loss_bar(lu_data_ha)
 }
 \arguments{
-\item{lu_data}{tidy version of the landuse data representation}
+\item{lu_data_ha}{tidy version of the landuse data representation}
 }
 \value{
 ggplot barplot

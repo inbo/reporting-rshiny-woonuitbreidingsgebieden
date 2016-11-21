@@ -10,8 +10,6 @@ get_wug_ids(link_table)
 }
 \arguments{
 \item{link_table}{data.frame}
-
-\item{id_wug}{char identifier for the WUG}
 }
 \value{
 list with unique wug identifier codes

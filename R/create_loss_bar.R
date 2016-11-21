@@ -13,13 +13,13 @@
 #' @return ggplot barplot
 #'
 #' @export
-#' @importFrom dplyr %>% arrange desc
+#' @importFrom dplyr %>% arrange_ desc
 #' @importFrom ggplot2 ggplot geom_bar scale_fill_manual scale_x_discrete
 #'     coord_flip ylab xlab theme aes
 #' @importFrom INBOtheme theme_inbo2015
 create_loss_bar <- function(lu_data_ha){
     lu_data_ha <- lu_data_ha %>%
-        arrange(desc(landuse))
+        arrange_(desc(landuse))
 
     ggplot(lu_data_ha, aes(x = landuse, y = pt_loss, fill = landuse)) +
         geom_bar(stat = "identity") +

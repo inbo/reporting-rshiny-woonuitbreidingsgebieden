@@ -18,7 +18,7 @@
 #'
 #' @export
 #' @importFrom readxl read_excel
-#' @importFrom dplyr %>% filter select bind_rows
+#' @importFrom dplyr %>% filter_ select bind_rows
 #' @importFrom tidyr gather
 get_landuse_data_pt <- function(xls_file, id_wug){
 
@@ -31,7 +31,7 @@ get_landuse_data_pt <- function(xls_file, id_wug){
     lu_wug <- read_excel(path = xls_file,
                          sheet = "LG_WUG_%")
     wuglu <- lu_wug %>%
-        filter(lu_wug$`WUG-NR` %in% id_wug) %>%
+        filter_(lu_wug$`WUG-NR` %in% id_wug) %>%
         select(2:19)
     wuglu$type <- paste("WUG\n", id_wug)
 
@@ -39,7 +39,7 @@ get_landuse_data_pt <- function(xls_file, id_wug){
     lu_gemeente <- read_excel(path = xls_file,
                               sheet = "LG_Gemeenten_%")
     gemeente <- lu_gemeente %>%
-        filter(lu_gemeente$Gemeente == location_info$GEMEENTE) %>%
+        filter_(lu_gemeente$Gemeente == location_info$GEMEENTE) %>%
         select(2:19)
     gemeente$type <- location_info$GEMEENTE
 
@@ -47,7 +47,7 @@ get_landuse_data_pt <- function(xls_file, id_wug){
     lu_provincie <- read_excel(path = xls_file,
                                sheet = "LG_Provincies_%")
     provincie <- lu_provincie %>%
-        filter(lu_provincie$Provincie == location_info$Provincie) %>%
+        filter_(lu_provincie$Provincie == location_info$Provincie) %>%
         select(2:19)
 
     provincie$type <- paste("Provincie\n", location_info$Provincie)
@@ -85,7 +85,7 @@ get_landuse_data_pt <- function(xls_file, id_wug){
 #'
 #' @export
 #' @importFrom readxl read_excel
-#' @importFrom dplyr %>% filter select bind_rows distinct
+#' @importFrom dplyr %>% filter_ select bind_rows distinct_
 #' @importFrom tidyr gather spread
 get_landuse_data_ha <- function(xls_file, id_wug){
 
@@ -98,7 +98,7 @@ get_landuse_data_ha <- function(xls_file, id_wug){
     lu_wug <- read_excel(path = xls_file,
                          sheet = "LG_Wug_ha")
     wuglu <- lu_wug %>%
-        filter(lu_wug$`WUG-NR` %in% id_wug) %>%
+        filter_(lu_wug$`WUG-NR` %in% id_wug) %>%
         select(2:19)
     wug_name <- paste("WUG\n", id_wug)
     wuglu$type <- wug_name
@@ -107,7 +107,7 @@ get_landuse_data_ha <- function(xls_file, id_wug){
     lu_gemeente <- read_excel(path = xls_file,
                               sheet = "LG_Gemeenten_ha")
     gemeente <- lu_gemeente %>%
-        filter(lu_gemeente$Gemeente == location_info$GEMEENTE) %>%
+        filter_(lu_gemeente$Gemeente == location_info$GEMEENTE) %>%
         select(2:19)
     gemeente_name <- location_info$GEMEENTE
     gemeente$type <- gemeente_name
@@ -118,12 +118,12 @@ get_landuse_data_ha <- function(xls_file, id_wug){
 
     # drop the columns with no effect on the WUG (WUG ha == 0)
     wug_landuses <- lu_data_ha %>%
-        filter(type != location_info$GEMEENTE & area != 0.0) %>%
-        filter(landuse != "Urbaan bebouwd") %>%
-        distinct(landuse)
+        filter_(type != location_info$GEMEENTE & area != 0.0) %>%
+        filter_(landuse != "Urbaan bebouwd") %>%
+        distinct_(landuse)
 
     # select only the relevant landuses
-    wug_ha <- lu_data_ha %>% filter(landuse %in% wug_landuses$landuse)
+    wug_ha <- lu_data_ha %>% filter_(landuse %in% wug_landuses$landuse)
     wug_ha$type <- factor(wug_ha$type,
                           levels = c(wug_name,
                                      gemeente_name),

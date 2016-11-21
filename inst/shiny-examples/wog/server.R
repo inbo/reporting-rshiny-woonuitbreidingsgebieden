@@ -13,8 +13,8 @@ library(radarchart)
 library(woonuitbreidingsgebieden)
 
 # extract data
-xls_file <- paste(system.file('extdata', package = 'woonuitbreidingsgebieden'), '
-                  Afwegingskader_Wug.xlsx', sep = '/')
+xls_file <- paste(system.file('extdata', package = 'woonuitbreidingsgebieden'),
+                  'Afwegingskader_Wug.xlsx', sep = '/')
 info_wug_ids <- readxl::read_excel(path = xls_file, sheet = "Info_Wug")
 ids_list <-  as.list(get_wug_ids(info_wug_ids))
 

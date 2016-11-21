@@ -5,19 +5,21 @@
 # INBO
 #
 
-library(dplyr)
-library(ggplot2)
-library(INBOtheme)
-
 #' Plot an stacked graph of the relative percentages of landuse in each of the
 #' spatial entities: WUG, municipality and province
 #'
-#'@param lu_data tidy version of the landuse data representation
+#' @param lu_data_ha tidy version of the landuse data representation
 #'
-#'@return ggplot barplot
+#' @return ggplot barplot
+#'
+#' @export
+#' @importFrom dplyr %>% arrange_ desc
+#' @importFrom ggplot2 ggplot geom_bar scale_fill_manual scale_x_discrete
+#'     coord_flip ylab xlab theme aes
+#' @importFrom INBOtheme theme_inbo2015
 create_loss_bar <- function(lu_data_ha){
     lu_data_ha <- lu_data_ha %>%
-        arrange(desc(landuse))
+        arrange_(desc(landuse))
 
     ggplot(lu_data_ha, aes(x = landuse, y = pt_loss, fill = landuse)) +
         geom_bar(stat = "identity") +
@@ -33,12 +35,6 @@ create_loss_bar <- function(lu_data_ha){
         xlab("") +
         theme_inbo2015(base_size = 16) +
         theme(axis.text = element_text((size = 16)))
-
-    # http://stackoverflow.com/questions/26853926/positioning-labels-on-geom-bar
 }
 
-# Alternatief idee: Plot gewoon de oppervlakte relatief in elkaar:
-# lichtgekleurd de gemeente-oppervlakte als een volle balk (representatie 100%)
-# daarop donkerder de WUG: het percentage van dat landgebruik dat ingenomen is
-# Hoe meer overlap: hoe meer impact!
 

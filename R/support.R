@@ -5,9 +5,6 @@
 # INBO
 #
 
-library(dplyr)
-library(tidyr)
-
 cbPalette_lu <- c("Bos" = "#006d2c",
                "Grasland" = "#31a354",
                "Halfnatuurlijk grasland" = "#74c476",
@@ -31,10 +28,12 @@ cbPalette_lu <- c("Bos" = "#006d2c",
 #' GEMEENTE relation the corresponding province and municipality based on the
 #' WUG identifier
 #'
-#'@param link_table data.frame
-#'@param id_wug char identifier for the WUG
+#' @param link_table data.frame
+#' @param id_wug char identifier for the WUG
 #'
-#'@return data.frame containing the wug municipality and province
+#' @return data.frame containing the wug municipality and province
+#'
+#' @export
 get_locations <- function(link_table, id_wug){
     return(link_table[link_table$`WUG-NR` == id_wug, c(1, 3:5)])
 }
@@ -44,10 +43,11 @@ get_locations <- function(link_table, id_wug){
 #' GEMEENTE relation the corresponding province and municipality based on the
 #' WUG identifier
 #'
-#'@param link_table data.frame
-#'@param id_wug char identifier for the WUG
+#' @param link_table data.frame
 #'
-#'@return list with unique wug identifier codes
+#' @return list with unique wug identifier codes
+#'
+#' @export
 get_wug_ids <- function(link_table){
     return(unique(link_table$`WUG-NR`))
 }

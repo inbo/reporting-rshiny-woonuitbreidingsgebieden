@@ -26,8 +26,8 @@ create_stacked_bar <- function(lu_data){
         scale_fill_manual(name = "Landgebruik",
                           values = cbPalette_lu) +
         xlab("") +
-        ylab("Oppervlakte %") +
-        theme_inbo2015(base_size = 16) +
-        theme(axis.text = element_text((size = 16)))
+        ylab("Oppervlakte %") #+
+        #theme_inbo2015(base_size = 16) +
+        #theme(axis.text = element_text((size = 16)))
     return(barp)
 }

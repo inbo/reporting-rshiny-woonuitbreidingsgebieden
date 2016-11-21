@@ -10,6 +10,7 @@
 library(shiny)
 library(INBOtheme)
 library(radarchart)
+library(woonuitbreidingsgebieden)
 
 # extract data
 xls_file <- paste(system.file('extdata', package = 'woonuitbreidingsgebieden'), '

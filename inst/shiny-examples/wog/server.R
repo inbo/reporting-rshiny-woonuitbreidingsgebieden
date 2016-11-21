@@ -60,7 +60,7 @@ shinyServer(function(input, output) {
                         get_esd_data(xls_file, ids_list[1])}
                     else {get_esd_data(xls_file, input$wug)}
                     })
-    output$radar <- renderChartJSRadar({
+    output$radar <- radarchart::renderChartJSRadar({
         create_radar(ESD_data(), input$ref)
         })
 

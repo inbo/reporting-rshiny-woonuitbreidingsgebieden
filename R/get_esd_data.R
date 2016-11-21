@@ -5,9 +5,6 @@
 # INBO
 #
 
-library(tidyr)
-library(dplyr)
-
 #' Collect the ESD data for a given WUG from the excel-sheet:
 #'
 #' TABLE:
@@ -18,60 +15,64 @@ library(dplyr)
 #'  - ESD_Wug_Provincie -> row Provincie, col C:R
 #'  - ESD_Wug_Vlaanderen -> row 'VlaamseWug' (all), col C:R
 #'
-#'@param xls_file excel file
-#'@param id_wug char wug identifier
+#' @param xls_file excel file
+#' @param id_wug char wug identifier
 #'
-#'@return data.frame
+#' @return data.frame
 #'
+#' @export
+#' @importFrom readxl read_excel
+#' @importFrom dplyr %>% filter select bind_rows
+#' @importFrom tidyr gather
 get_esd_data <- function(xls_file, id_wug){
 
     # read in first sheet and get province and municipality info
-    info_wug <- readxl::read_excel(path = xls_file,
-                                   sheet = "Info_Wug")
+    info_wug <- read_excel(path = xls_file,
+                           sheet = "Info_Wug")
     location_info <- get_locations(info_wug, id_wug)
 
     # get ESD WUG (ESD_Wug)
-    esd_wug <- readxl::read_excel(path = xls_file,
-                                  sheet = "ESD_Wug")
+    esd_wug <- read_excel(path = xls_file,
+                          sheet = "ESD_Wug")
     wug <- esd_wug %>%
         filter(esd_wug$NR_WUG == id_wug) %>%
         select(6:21)
     wug$type <- "wug"
 
     # get ESD municipality (ESD_Gemeente)
-    esd_gemeente <- readxl::read_excel(path = xls_file,
-                                       sheet = "ESD_Gemeente")
+    esd_gemeente <- read_excel(path = xls_file,
+                               sheet = "ESD_Gemeente")
     gemeente <- esd_gemeente %>%
         filter(esd_gemeente$Gemeente == location_info$GEMEENTE) %>%
         select(3:18)
     gemeente$type <- "gemeente"
 
     # get ESD Flanders (ESD_Vlaanderen)
-    esd_vlaanderen <- readxl::read_excel(path = xls_file,
-                                         sheet = "ESD_Vlaanderen")
+    esd_vlaanderen <- read_excel(path = xls_file,
+                                 sheet = "ESD_Vlaanderen")
     vlaanderen <- esd_vlaanderen %>%
         select(3:18)
     vlaanderen$type <- "vlaanderen"
 
     # get ESD for WUG in municipality (ESD_Wug_Gemeente)
-    esd_wug_gemeente <- readxl::read_excel(path = xls_file,
-                                           sheet = "ESD_Wug_Gemeente")
+    esd_wug_gemeente <- read_excel(path = xls_file,
+                                   sheet = "ESD_Wug_Gemeente")
     wug_gemeente <- esd_wug_gemeente %>%
         filter(esd_wug_gemeente$Gemeente == location_info$GEMEENTE) %>%
         select(2:17)
     wug_gemeente$type <- "wug_gemeente"
 
     # get ESD for WUG in province (ESD_Wug_Provincie)
-    esd_wug_provincie <- readxl::read_excel(path = xls_file,
-                                            sheet = "ESD_Wug_Provincie")
+    esd_wug_provincie <- read_excel(path = xls_file,
+                                    sheet = "ESD_Wug_Provincie")
     wug_provincie <- esd_wug_provincie %>%
         filter(esd_wug_provincie$Provincie == location_info$Provincie) %>%
         select(3:18)
     wug_provincie$type <- "wug_provincie"
 
     # get ESD for WUG in Flanders (ESD_Wug_Vlaanderen)
-    esd_wug_vlaanderen <- readxl::read_excel(path = xls_file,
-                                             sheet = "ESD_Wug_Vlaanderen")
+    esd_wug_vlaanderen <- read_excel(path = xls_file,
+                                     sheet = "ESD_Wug_Vlaanderen")
     wug_vlaanderen <- esd_wug_vlaanderen %>%
         select(3:18)
     wug_vlaanderen$type <- "wug_vlaanderen"

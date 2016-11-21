@@ -5,16 +5,19 @@
 # INBO
 #
 
-library(tidyr)
-library(radarchart)
-
 #' Plot an interactive radar/spider-chart of the ESD data towards a given
 #' reference
 #'
-#'@param ESD_data tidy version of the ESD data representation
-#'@param char choose an option from: wug, gemeente, vlaanderen,
-#' wug_gemeente, wug_provincie, wug_vlaanderen
+#' @param ESD_data tidy version of the ESD data representation
+#' @param char choose an option from: wug, gemeente, vlaanderen,
+#'     wug_gemeente, wug_provincie, wug_vlaanderen
+#' @param threshold provide the value on which a red threshold line should be
+#'     provided
 #'
+#' @export
+#' @importFrom dplyr %>% filter
+#' @importFrom tidyr spread
+#' @importFrom radarchart chartJSRadar
 create_radar <- function(ESD_data, reference, threshold = 0.5){
 
     current_sel <- ESD_data %>%

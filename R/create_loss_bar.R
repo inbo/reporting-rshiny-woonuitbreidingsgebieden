@@ -8,7 +8,7 @@
 #' Plot an stacked graph of the relative percentages of landuse in each of the
 #' spatial entities: WUG, municipality and province
 #'
-#' @param lu_data tidy version of the landuse data representation
+#' @param lu_data_ha tidy version of the landuse data representation
 #'
 #' @return ggplot barplot
 #'

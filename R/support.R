@@ -44,7 +44,6 @@ get_locations <- function(link_table, id_wug){
 #' WUG identifier
 #'
 #' @param link_table data.frame
-#' @param id_wug char identifier for the WUG
 #'
 #' @return list with unique wug identifier codes
 #'

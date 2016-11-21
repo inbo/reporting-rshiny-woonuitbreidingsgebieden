@@ -14,15 +14,10 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
 
 In this document, a short overview of the functions developed to make the WUG Rshiny application are showcased, as they can be used outside the scope of the application as well. For example, when making reports or doing other data analysis.
 
-The different are not organised in a package, but can be enabled by sourcing the individual files (or run inside Rstudio). Make sure you have n Rstudio project running with the repository main folder as the working directory of your project:
+The different are organised in a package:
 
 ```{r loadfun}
-source('src/support.R')
-source("src/get_esd_data.R")
-source("src/get_landuse_data.R")
-source("src/create_radar.R")
-source("src/create_stacked_bar.R")
-source("src/create_loss_bar.R")
+library("woonuitbreidingsgebieden")
 ```
 
 On the one hand, the `get_*` functions are created to extract the data from the data source (excel-file). On the other hand, the `create_*` functions are used to make the graphs. The `support.R` script provide some additional help functions.
@@ -33,7 +28,7 @@ In this tutorial, we will use the WUG `11002_08` to illustrate the functions.
 
 ```{r }
 id_wug <- "11002_08"
-xls_file <- "data/Afwegingskader_Wug_versie2.xlsx"
+xls_file <- "inst/extdata/Afwegingskader_Wug.xlsx"
 ```
 
 ## Landuse plots

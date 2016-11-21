@@ -21,7 +21,7 @@
 create_radar <- function(ESD_data, reference, threshold = 0.5){
 
     current_sel <- ESD_data %>%
-        filter_(type == "wug" | type == reference) %>%
+        filter_(~type %in% c("wug", reference)) %>%
         spread(key = type, value = value)
 
     # add the threshold

@@ -9,3 +9,4 @@ ExecStart=/home/ubuntu/startapp.sh
 
 [Install]
 WantedBy=multi-user.target
+

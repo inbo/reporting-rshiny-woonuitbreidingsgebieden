@@ -2,8 +2,8 @@
 #' @return no return value
 #' @importFrom shiny runApp
 #' @export
-run_wog <- function() {
-    appDir <- system.file("shiny-examples", "wog",
+run_wug <- function() {
+    appDir <- system.file("shiny-examples", "wug",
                           package = "woonuitbreidingsgebieden")
     if (appDir == "") {
         stop("Could not find example directory.

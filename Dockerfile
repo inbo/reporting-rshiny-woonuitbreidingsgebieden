@@ -13,11 +13,6 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libssh2-1-dev \
     libssl1.0.0 \
-    fonts-freefont-ttf 
-
-# system library dependency for the euler app
-#RUN apt-get update && apt-get install -y \
-#    libmpfr-dev
 
 # basic shiny functionality
 RUN R -e "install.packages(c('shiny', 'rmarkdown'), repos='https://cloud.r-project.org/')"

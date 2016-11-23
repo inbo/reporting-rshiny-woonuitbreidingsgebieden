@@ -31,11 +31,11 @@ shiny:
       host: 127.0.0.1
       port-range-start: 20000
   apps:
-  - name: 02_wog
+  - name: 02_wug
     display-name: Visualisatie woonuitbreidingsgebieden
     description: Visualisatie van landgebruik en ecosysteemdiensten van de individuele woonuitbreidingsgebieden   
-    docker-cmd: ["R", "-e woonuitbreidingsgebieden::run_wog()"]
-    docker-image: wog1
+    docker-cmd: ["R", "-e woonuitbreidingsgebieden::run_wug()"]
+    docker-image: wug1
     groups: scientists, mathematicians
 logging:
   file:

@@ -1,0 +1,10 @@
+[Unit]
+Description=Starting the shinyproxy application on reboot
+
+[Service]
+Type=forking
+WorkingDirectory=/home/ubuntu/woonuitbreidingsgebieden
+ExecStart=java -jar shinyproxy-0.7.5.jar > logit 2>&1 &
+
+[Install]
+WantedBy=multi-user.target

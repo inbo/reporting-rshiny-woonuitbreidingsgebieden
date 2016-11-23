@@ -24,7 +24,7 @@ fi
 tar -zcvf woonuitbreidingsgebieden.tar.gz woonuitbreidingsgebieden
 
 # build the docker image
-sudo docker build -t wog1 .
+sudo docker build -t wug1 .
 
 # start the application
 nohup java -jar shinyproxy-0.7.5.jar > logit 2>&1 &

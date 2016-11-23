@@ -36,4 +36,4 @@ COPY Rprofile.site /usr/lib/R/etc/
 
 EXPOSE 3838
 
-CMD ["R", "-e woonuitbreidingsgebieden::run_wog()"]
+CMD ["R", "-e woonuitbreidingsgebieden::run_wug()"]

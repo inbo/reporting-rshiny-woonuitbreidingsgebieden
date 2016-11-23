@@ -38,11 +38,11 @@ shiny:
     docker-image: openanalytics/shinyproxy-demo
     groups: scientists, mathematicians
   - name: 02_wog
-    description: Visualisatie woonuitbreidingsgebieden
+    display-name: Visualisatie woonuitbreidingsgebieden
+    description: Visualisatie van landgebruik en ecosysteemdiensten van de individuele woonuitbreidingsgebieden   
     docker-cmd: ["R", "-e woonuitbreidingsgebieden::run_wog()"]
     docker-image: wog1
     groups: scientists, mathematicians
-
 logging:
   file:
     shinyproxy.log

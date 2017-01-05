@@ -7,7 +7,6 @@ Maintainer: Stijn Van Hoey <stijn.vanhoey@inbo.be>
 Description: Visualization of landuse and ecosystem services of the individual
     woonuitbreidingsgebieden of Flanders
 Imports:
-    INBOtheme,
     dplyr,
     ggplot2,
     radarchart,

@@ -42,9 +42,9 @@ shinyUI(fluidPage(
                                             "WUG gemeente" = "wug_gemeente",
                                             "WUG provincie" = "wug_provincie",
                                             "WUG Vlaanderen" = "wug_vlaanderen")),
-                           radarchart::chartJSRadarOutput("radar",
-                                              width = "450",
-                                              height = "300"))
+                           plotOutput("radar",
+                                      width = "800",
+                                      height = "800"))
                         )
               )
           )

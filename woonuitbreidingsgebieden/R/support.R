@@ -5,6 +5,7 @@
 # INBO
 #
 
+
 cbPalette_lu <- c("Bos" = "#006d2c",
                "Grasland" = "#31a354",
                "Halfnatuurlijk grasland" = "#74c476",
@@ -23,6 +24,10 @@ cbPalette_lu <- c("Bos" = "#006d2c",
                "Haven" = "#3182bd",
                "Water" = "#9ecae1",
                "Moeras" = "#deebf7")
+
+inbo.steun.donkerroos <- rgb(132, 56, 96, maxColorValue = 255)
+inbo.grijs <- rgb(142, 157, 167, maxColorValue = 255)
+vl.grey6 <- rgb(73, 73, 73, maxColorValue = 255)
 
 #' get from link-table containing an overview of the WUG-NR - Provincie -
 #' GEMEENTE relation the corresponding province and municipality based on the

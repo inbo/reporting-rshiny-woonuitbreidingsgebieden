@@ -8,8 +8,6 @@
 #
 
 library(shiny)
-library(INBOtheme)
-library(radarchart)
 library(woonuitbreidingsgebieden)
 
 # extract data
@@ -62,7 +60,7 @@ shinyServer(function(input, output) {
                         get_esd_data(xls_file, ids_list[1])}
                     else {get_esd_data(xls_file, input$wug)}
                     })
-    output$radar <- radarchart::renderChartJSRadar({
+    output$radar <- renderPlot({
         create_radar(ESD_data(), input$ref)
         })
 

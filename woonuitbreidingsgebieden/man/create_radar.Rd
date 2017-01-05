@@ -2,10 +2,11 @@
 % Please edit documentation in R/create_radar.R
 \name{create_radar}
 \alias{create_radar}
-\title{Plot an interactive radar/spider-chart of the ESD data towards a given
-reference}
+\title{Plot an nont-interactive ggplot style radar/spider-chart of the ESD data
+towards a given reference, using the custom ggradar function, derived from
+the ggradar package}
 \usage{
-create_radar(ESD_data, reference, threshold = 0.5)
+create_radar(ESD_data, reference, thresh = 0.5, base.text.size = 16)
 }
 \arguments{
 \item{ESD_data}{tidy version of the ESD data representation}
@@ -13,11 +14,14 @@ create_radar(ESD_data, reference, threshold = 0.5)
 \item{reference}{char choose an option from: wug, gemeente, vlaanderen,
 wug_gemeente, wug_provincie, wug_vlaanderen}
 
-\item{threshold}{provide the value on which a red threshold line should be
+\item{thresh}{provide the value on which a red threshold line should be
 provided}
+
+\item{base.text.size}{int size of the textual graph elements}
 }
 \description{
-Plot an interactive radar/spider-chart of the ESD data towards a given
-reference
+Plot an nont-interactive ggplot style radar/spider-chart of the ESD data
+towards a given reference, using the custom ggradar function, derived from
+the ggradar package
 }
 

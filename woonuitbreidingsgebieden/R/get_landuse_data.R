@@ -7,9 +7,9 @@
 
 #' Collect the  LANDUSE data for a given WUG from the excel-sheet:
 #' TABLE:
-#'  - LG_WUG_% -> row id_wug, col B:S
-#'  - LG_Gemeenten_% -> row GEMEENTE, col B:S
-#'  - LG_Provincies_% -> row Provincie, col B:S
+#'  - LG_WUG_\% -> row id_wug, col B:S
+#'  - LG_Gemeenten_\% -> row GEMEENTE, col B:S
+#'  - LG_Provincies_\% -> row Provincie, col B:S
 #'
 #' @param xls_file excel file
 #' @param id_wug char wug identifier
@@ -74,19 +74,19 @@ get_landuse_data_pt <- function(xls_file, id_wug){
 
 #' Collect the  LANDUSE data for a given WUG from the excel-sheet in ha:
 #' TABLE:
-#'  - LG_WUG_% -> row id_wug, col B:S
-#'  - LG_Gemeenten_% -> row GEMEENTE, col B:S
-#'  - LG_Provincies_% -> row Provincie, col B:S
+#'  - LG_WUG_\% -> row id_wug, col B:S
+#'  - LG_Gemeenten_\% -> row GEMEENTE, col B:S
+#'  - LG_Provincies_\% -> row Provincie, col B:S
 #'
 #'@param xls_file excel file
 #'@param id_wug char wug identifier
 #'
 #'@return data.frame
 #'
-#' @export
-#' @importFrom readxl read_excel
-#' @importFrom dplyr %>% filter_ select bind_rows distinct_
-#' @importFrom tidyr gather spread
+#'@export
+#'@importFrom readxl read_excel
+#'@importFrom dplyr %>% filter_ select bind_rows distinct_
+#'@importFrom tidyr gather spread
 get_landuse_data_ha <- function(xls_file, id_wug){
 
     # read in first sheet and get province and municipality info

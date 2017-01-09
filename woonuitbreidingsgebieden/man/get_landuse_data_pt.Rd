@@ -4,9 +4,9 @@
 \alias{get_landuse_data_pt}
 \title{Collect the  LANDUSE data for a given WUG from the excel-sheet:
 TABLE:
- - LG_WUG_% -> row id_wug, col B:S
- - LG_Gemeenten_% -> row GEMEENTE, col B:S
- - LG_Provincies_% -> row Provincie, col B:S}
+ - LG_WUG_\% -> row id_wug, col B:S
+ - LG_Gemeenten_\% -> row GEMEENTE, col B:S
+ - LG_Provincies_\% -> row Provincie, col B:S}
 \usage{
 get_landuse_data_pt(xls_file, id_wug)
 }
@@ -21,8 +21,8 @@ data.frame
 \description{
 Collect the  LANDUSE data for a given WUG from the excel-sheet:
 TABLE:
- - LG_WUG_% -> row id_wug, col B:S
- - LG_Gemeenten_% -> row GEMEENTE, col B:S
- - LG_Provincies_% -> row Provincie, col B:S
+ - LG_WUG_\% -> row id_wug, col B:S
+ - LG_Gemeenten_\% -> row GEMEENTE, col B:S
+ - LG_Provincies_\% -> row Provincie, col B:S
 }
 

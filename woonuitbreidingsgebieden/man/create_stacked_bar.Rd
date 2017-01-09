@@ -5,10 +5,12 @@
 \title{Plot an stacked graph of the relative percentages of landuse in each of the
 spatial entities: WUG, municipality and province}
 \usage{
-create_stacked_bar(lu_data)
+create_stacked_bar(lu_data, base.text.size = 16)
 }
 \arguments{
 \item{lu_data}{tidy version of the landuse data representation}
+
+\item{base.text.size}{int size of the textual graph elements}
 }
 \value{
 ggplot barplot

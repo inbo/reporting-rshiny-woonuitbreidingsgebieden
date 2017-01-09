@@ -328,13 +328,6 @@ ggradar <- function(plot.data,
                                                     colour = group),
                              size = group.line.width)
 
-    # ... + group points (cluster data)
-    base <- base + geom_point(data = group$path, aes(x = x, y = y,
-                                                     group = group,
-                                                     colour = group),
-                              size = group.point.size)
-
-
     # ... + grid-line labels (max; ave; min) [only add min.
     # gridline label if required]
     if (grid.label.min == TRUE) {

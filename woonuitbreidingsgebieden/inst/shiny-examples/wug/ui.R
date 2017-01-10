@@ -38,6 +38,7 @@ shinyUI(fluidPage(
                            h2(textOutput("wug_display")),
                            selectInput("ref", "Vergelijk met:",
                                        list("Gemeente" = "gemeente",
+                                            "Provincie" = "provincie",
                                             "Vlaanderen" = "vlaanderen",
                                             "WUG gemeente" = "wug_gemeente",
                                             "WUG provincie" = "wug_provincie",

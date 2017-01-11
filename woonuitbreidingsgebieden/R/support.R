@@ -40,7 +40,7 @@ vl.grey6 <- rgb(73, 73, 73, maxColorValue = 255)
 #'
 #' @export
 get_locations <- function(link_table, id_wug){
-    return(link_table[link_table$`WUG-NR` == id_wug, c(1, 3:5)])
+    return(link_table[link_table$WUG_ID == id_wug, ])
 }
 
 

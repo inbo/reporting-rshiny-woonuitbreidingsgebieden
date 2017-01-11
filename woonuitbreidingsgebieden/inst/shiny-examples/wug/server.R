@@ -10,9 +10,39 @@
 library(shiny)
 library(woonuitbreidingsgebieden)
 
-# extract data
+
 xls_file <- paste(system.file('extdata', package = 'woonuitbreidingsgebieden'),
                   'Afwegingskader_Wug.xlsx', sep = '/')
+
+# extract data -> info lists about current excel extraction
+esd_columns <- c("Voedsel", "Houtprod", "EnergieMaaisel",
+                 "NabijGroen", "Bestuiving", "Erosie",
+                 "Bodemvrucht", "Copslag_bodem", "Copslag_hout",
+                 "Geluidsregulatie", "Luchtzuivering", "UHI",
+                 "Denitrificatie", "DiepGrondwater", "Komberging NOG",
+                 "Retentie")
+
+esd_sheets <- c("ESD_Wug","ESD_Wug_Vlaanderen", "ESD_Wug_Provincie",
+                "ESD_Wug_Gemeente", "ESD_Vlaanderen", "ESD_provincie",
+                "ESD_Gemeente")
+
+lu_columns <- c("Bos", "Grasland", "Halfnatuurlijk grasland",
+                "Ander groen", "Heide", "Duinen", "Landbouw (akker)",
+                "Landbouw (boomgaard)", "Landbouw (grasland)",
+                "Landbouw (groenten & fruit)", "Urbaan bebouwd",
+                "Urbaan onbebouwd", "Infrastructuur", "Industrie",
+                "Militaire voorziening", "Haven", "Water", "Moeras")
+
+lu_sheets <- c("LG_Wug_ha", "LG_Gemeenten_ha", "LG_Provincies_ha",
+               "LG_WUG_%", "LG_Gemeenten_%", "LG_Provincies_%")
+
+lu_data <- extract_lu_data(lu_sheets, xls_file, lu_columns)
+esd_data <- extract_esd_data(esd_sheets, xls_file, columns)
+wug_link_data <- extract_link_table(xls_file, "Info_Wug")
+
+##
+
+
 info_wug_ids <- readxl::read_excel(path = xls_file, sheet = "Info_Wug")
 ids_list <-  as.list(get_wug_ids(info_wug_ids))
 

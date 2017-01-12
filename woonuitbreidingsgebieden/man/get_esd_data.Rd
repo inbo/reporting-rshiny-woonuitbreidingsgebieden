@@ -2,25 +2,18 @@
 % Please edit documentation in R/get_esd_data.R
 \name{get_esd_data}
 \alias{get_esd_data}
-\title{Collect the ESD data for a given WUG from the excel-sheet:}
+\title{Collect the ESD data for a given WUG from the tidy data representation}
 \usage{
-get_esd_data(xls_file, id_wug)
+get_esd_data(esd_data, wug_link_data, id_wug)
 }
 \arguments{
-\item{xls_file}{excel file}
+\item{esd_data}{tidy representation of all ecosystem services data}
 
-\item{id_wug}{char wug identifier}
-}
-\value{
-data.frame
+\item{wug_link_data}{tidy version of link table wug/municipality/province}
+
+\item{id_wug}{wug identifier to get data from}
 }
 \description{
-TABLE:
- - ESD_Wug >- row id_wug, col F:U
- - ESD_Gemeente -> row GEMEENTE, col C:R
- - ESD_Vlaanderen -> row 'Vlaanderen', col C:R
- - ESD_Wug_Gemeente -> row GEMEENTE, col B:Q
- - ESD_Wug_Provincie -> row Provincie, col C:R
- - ESD_Wug_Vlaanderen -> row 'VlaamseWug' (all), col C:R
+Collect the ESD data for a given WUG from the tidy data representation
 }
 

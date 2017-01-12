@@ -2,27 +2,18 @@
 % Please edit documentation in R/get_landuse_data.R
 \name{get_landuse_data_pt}
 \alias{get_landuse_data_pt}
-\title{Collect the  LANDUSE data for a given WUG from the excel-sheet:
-TABLE:
- - LG_WUG_\% -> row id_wug, col B:S
- - LG_Gemeenten_\% -> row GEMEENTE, col B:S
- - LG_Provincies_\% -> row Provincie, col B:S}
+\title{Collect the percentage landuse data for a given WUG from tidy data}
 \usage{
-get_landuse_data_pt(xls_file, id_wug)
+get_landuse_data_pt(lu_data, wug_link_data, id_wug)
 }
 \arguments{
-\item{xls_file}{excel file}
+\item{lu_data}{tidy representation of all landuse data}
 
-\item{id_wug}{char wug identifier}
-}
-\value{
-data.frame
+\item{wug_link_data}{tidy version of link table wug/municipality/province}
+
+\item{id_wug}{wug identifier to get data from}
 }
 \description{
-Collect the  LANDUSE data for a given WUG from the excel-sheet:
-TABLE:
- - LG_WUG_\% -> row id_wug, col B:S
- - LG_Gemeenten_\% -> row GEMEENTE, col B:S
- - LG_Provincies_\% -> row Provincie, col B:S
+Collect the percentage landuse data for a given WUG from tidy data
 }
 

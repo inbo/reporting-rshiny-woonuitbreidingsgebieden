@@ -15,7 +15,7 @@
 #'
 #' @export
 #' @importFrom readxl read_excel
-#' @importFrom dplyr %>% select rename_
+#' @importFrom dplyr %>% select rename_ one_of
 extract_link_table <- function(xls_file, sheetname){
     read_excel(xls_file, sheet = sheetname) %>%
         select(one_of(c("WUG-NR", "Provincie", "GEMEENTE"))) %>%

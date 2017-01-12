@@ -198,10 +198,9 @@ ggradar <- function(plot.data,
 
     # (d) Create file containing axis labels + associated plotting coordinates
     # labels
-    axis$label <- data.frame(
-        text = axis.labels,
-        x = NA,
-        y = NA )
+    axis$label <- data.frame("text" = axis.labels,
+                             "x" = NA,
+                             "y" = NA )
 
     #axis label coordinates
     n.vars <- length(var.names)
@@ -296,7 +295,7 @@ ggradar <- function(plot.data,
 
     # + radial axes
     base <- base + geom_path(data = axis$path, aes(x = x, y = y,
-                                                   group = axis.no),
+                                                   group = "axis.no"),
                              colour = grid.line.colour,
                              linetype = grid.line.linetype,
                              alpha = grid.line.alpha,

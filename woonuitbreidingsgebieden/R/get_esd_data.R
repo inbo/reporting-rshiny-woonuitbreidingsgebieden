@@ -5,6 +5,28 @@
 # INBO
 #
 
+
+#' Collect the ESD data for a given WUG from the tidy data representation
+#'
+#' @param esd_data tidy representation of all ecosystem services data
+#' @param wug_link_data tidy version of link table wug/municipality/province
+#' @param id_wug wug identifier to get data from
+#'
+#' @export
+#' @importFrom dplyr %>% mutate left_join select_ rename_
+#' @importFrom tidyr gather
+get_esd_data <- function(esd_data, wug_link_data, id_wug){
+
+    location_info <- get_locations(wug_link_data, id_wug)
+    location_info %>%
+        mutate(Gewest = "Vlaanderen") %>%
+        mutate(Gewestwug = "VlaamseWug") %>%
+        gather(property, ID) %>%
+        left_join(y = esd_data, by = "ID") %>%
+        select_("category", "type", "value") %>%
+        rename_(ESD = "category")
+}
+
 #' Collect the ESD data for a given WUG from the excel-sheet:
 #'
 #' TABLE:
@@ -24,11 +46,10 @@
 #' @importFrom readxl read_excel
 #' @importFrom dplyr %>% filter_ select bind_rows
 #' @importFrom tidyr gather
-get_esd_data <- function(xls_file, id_wug){
+get_esd_data_excel <- function(xls_file, id_wug){
 
     # read in first sheet and get province and municipality info
-    info_wug <- read_excel(path = xls_file,
-                           sheet = "Info_Wug")
+    info_wug <- extract_link_table(xls_file, "Info_Wug")
     location_info <- get_locations(info_wug, id_wug)
 
     # get ESD WUG (ESD_Wug)
@@ -43,7 +64,7 @@ get_esd_data <- function(xls_file, id_wug){
     esd_gemeente <- read_excel(path = xls_file,
                                sheet = "ESD_Gemeente")
     gemeente <- esd_gemeente %>%
-        filter_(~Gemeente == location_info$GEMEENTE) %>%
+        filter_(~Gemeente == location_info$Gemeente) %>%
         select(3:18)
     gemeente$type <- "gemeente"
 
@@ -58,7 +79,7 @@ get_esd_data <- function(xls_file, id_wug){
     esd_wug_gemeente <- read_excel(path = xls_file,
                                    sheet = "ESD_Wug_Gemeente")
     wug_gemeente <- esd_wug_gemeente %>%
-        filter_(~Gemeente == location_info$GEMEENTE) %>%
+        filter_(~Gemeente == location_info$Gemeente) %>%
         select(2:17)
     wug_gemeente$type <- "wug_gemeente"
 

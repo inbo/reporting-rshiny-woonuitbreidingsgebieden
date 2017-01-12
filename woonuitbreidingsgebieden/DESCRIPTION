@@ -8,6 +8,7 @@ Description: Visualization of landuse and ecosystem services of the individual
     woonuitbreidingsgebieden of Flanders
 Imports:
     dplyr,
+    plyr,
     ggplot2,
     radarchart,
     readxl,

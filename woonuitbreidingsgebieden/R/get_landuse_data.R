@@ -16,6 +16,7 @@
 #' @importFrom dplyr %>% mutate select_ left_join filter_ distinct_ rename_
 #' @importFrom tidyr gather spread
 #' @importFrom plyr mapvalues
+#' @importFrom lazyeval interp
 get_landuse_data_pt <- function(lu_data, wug_link_data, id_wug) {
 
     location_info <- get_locations(wug_link_data, id_wug)
@@ -23,14 +24,16 @@ get_landuse_data_pt <- function(lu_data, wug_link_data, id_wug) {
     wug_name <- paste("WUG\n", id_wug)
     provincie_name <- paste("Provincie\n", location_info$Provincie)
 
-    location_info <- location_info %>% gather(property, ID)
-    location_info["spatial_entity"] <- c("LG_WUG_%",
-                                         "LG_Gemeenten_%",
-                                         "LG_Provincies_%")
+    location_info <- location_info %>%
+        gather(property, ID) %>%
+        arrange_("property")
+    location_info["spatial_entity"] <- c("LG_Gemeenten_%",
+                                         "LG_Provincies_%",
+                                         "LG_WUG_%")
     location_info %>%
         left_join(y = lu_data, by = c("ID", "spatial_entity")) %>%
-        filter_(lazyeval::interp(quote(grepl("%", col)),
-                                 col = as.name("spatial_entity"))) %>%
+        filter_(interp(quote(grepl("%", col)),
+                       col = as.name("spatial_entity"))) %>%
         mutate("spatial_entity" = mapvalues(spatial_entity,
                                             c("LG_WUG_%",
                                               "LG_Gemeenten_%",
@@ -129,10 +132,12 @@ get_landuse_data_ha <- function(lu_data, wug_link_data, id_wug){
     gemeente_name <- location_info$Gemeente
     wug_name <- paste("WUG\n", id_wug)
 
-    location_info <- location_info %>% gather(property, ID)
-    location_info["spatial_entity"] <- c("LG_Wug_ha",
-                                         "LG_Gemeenten_ha",
-                                         "LG_Provincies_ha")
+    location_info <- location_info %>%
+        gather(property, ID) %>%
+        arrange_("property")
+    location_info["spatial_entity"] <- c("LG_Gemeenten_ha",
+                                         "LG_Provincies_ha",
+                                         "LG_Wug_ha")
 
     lu_data_ha <- location_info %>%
         left_join(y = lu_data, by = c("ID", "spatial_entity")) %>%

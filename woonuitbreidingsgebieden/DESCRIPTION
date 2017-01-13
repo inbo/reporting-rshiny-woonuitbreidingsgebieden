@@ -13,7 +13,8 @@ Imports:
     radarchart,
     readxl,
     tidyr,
-    shiny
+    shiny,
+    lazyeval
 License: BSD-3
 Encoding: UTF-8
 LazyData: true

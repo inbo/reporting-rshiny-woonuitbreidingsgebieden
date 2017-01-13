@@ -17,12 +17,17 @@
 #' @importFrom tidyr gather
 get_esd_data <- function(esd_data, wug_link_data, id_wug){
 
-    location_info <- get_locations(wug_link_data, id_wug)
-    location_info %>%
+    location_info <- get_locations(wug_link_data, id_wug) %>%
         mutate(Gewest = "Vlaanderen") %>%
         mutate(Gewestwug = "VlaamseWug") %>%
-        gather(property, ID) %>%
-        left_join(y = esd_data, by = "ID") %>%
+        gather(property, ID)
+    location_info <- bind_rows(location_info[1:4,],
+                               location_info[2:3,],
+                               location_info[5,])
+    location_info$type <- c("wug", "provincie", "gemeente", "vlaanderen",
+                            "wug_provincie", "wug_gemeente", "wug_vlaanderen")
+    location_info %>%
+        left_join(y = esd_data, by = c("ID", "type")) %>%
         select_("category", "type", "value") %>%
         rename_(ESD = "category")
 }

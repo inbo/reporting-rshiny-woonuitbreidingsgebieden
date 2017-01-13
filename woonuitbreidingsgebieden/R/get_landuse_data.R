@@ -23,9 +23,12 @@ get_landuse_data_pt <- function(lu_data, wug_link_data, id_wug) {
     wug_name <- paste("WUG\n", id_wug)
     provincie_name <- paste("Provincie\n", location_info$Provincie)
 
+    location_info <- location_info %>% gather(property, ID)
+    location_info["spatial_entity"] <- c("LG_WUG_%",
+                                         "LG_Gemeenten_%",
+                                         "LG_Provincies_%")
     location_info %>%
-        gather(property, ID) %>%
-        left_join(y = lu_data, by = "ID") %>%
+        left_join(y = lu_data, by = c("ID", "spatial_entity")) %>%
         filter_(lazyeval::interp(quote(grepl("%", col)),
                                  col = as.name("spatial_entity"))) %>%
         mutate("spatial_entity" = mapvalues(spatial_entity,

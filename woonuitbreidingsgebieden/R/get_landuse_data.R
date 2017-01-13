@@ -129,9 +129,13 @@ get_landuse_data_ha <- function(lu_data, wug_link_data, id_wug){
     gemeente_name <- location_info$Gemeente
     wug_name <- paste("WUG\n", id_wug)
 
+    location_info <- location_info %>% gather(property, ID)
+    location_info["spatial_entity"] <- c("LG_Wug_ha",
+                                         "LG_Gemeenten_ha",
+                                         "LG_Provincies_ha")
+
     lu_data_ha <- location_info %>%
-        gather(property, ID) %>%
-        left_join(y = lu_data, by = "ID") %>%
+        left_join(y = lu_data, by = c("ID", "spatial_entity")) %>%
         filter_(~spatial_entity %in% c("LG_Wug_ha", "LG_Gemeenten_ha")) %>%
         mutate("spatial_entity" = mapvalues(spatial_entity,
                                             c("LG_Wug_ha",
@@ -143,7 +147,7 @@ get_landuse_data_ha <- function(lu_data, wug_link_data, id_wug){
 
     # drop the columns with no effect on the WUG (WUG ha == 0)
     wug_landuses <- lu_data_ha %>%
-        filter_("ID" != location_info$Gemeente & "area" != 0.0) %>%
+        filter_("ID" != gemeente_name & "value" != 0.0) %>%
         filter_("landuse" != "Urbaan bebouwd") %>%
         distinct_(~landuse)
 

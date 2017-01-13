@@ -16,11 +16,12 @@
 #' @export
 #' @importFrom plyr mapvalues
 #' @importFrom dplyr %>% mutate_ bind_rows
+#' @importFrom lazyeval interp
 extract_esd_data <- function(esd_sheets, xls_file, columns) {
     bind_rows(lapply(esd_sheets, extract_sheet,
                      xls_file = xls_file,
                      columns = columns)) %>%
-        mutate("type" = plyr::mapvalues(spatial_entity,
+        mutate("type" = mapvalues(spatial_entity,
                                         c("ESD_Wug",
                                           "ESD_Gemeente",
                                           "ESD_provincie",
@@ -34,5 +35,7 @@ extract_esd_data <- function(esd_sheets, xls_file, columns) {
                                           "vlaanderen",
                                           "wug_gemeente",
                                           "wug_provincie",
-                                          "wug_vlaanderen")))
+                                          "wug_vlaanderen"))) %>%
+        mutate_("value" = interp(quote( ifelse(is.na(col), 0.0, col)),
+                                 col = as.name("value")))
 }

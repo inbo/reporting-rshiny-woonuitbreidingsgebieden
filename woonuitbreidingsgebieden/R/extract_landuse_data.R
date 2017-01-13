@@ -33,5 +33,8 @@ extract_lu_data <- function(lu_sheets, xls_file, columns) {
                                           "Militaire voorziening", "Haven",
                                           "Water", "Moeras"),
                                ordered = TRUE)
+    lu_data <- lu_data %>%
+        mutate_("value" = interp(quote( ifelse(is.na(col), 0.0, col)),
+                                 col = as.name("value")))
     return(lu_data)
 }

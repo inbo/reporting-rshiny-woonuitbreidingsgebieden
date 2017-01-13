@@ -54,7 +54,7 @@ get_locations <- function(link_table, id_wug){
 #'
 #' @export
 get_wug_ids <- function(link_table){
-    return(unique(link_table$`WUG-NR`))
+    return(unique(link_table$WUG_ID))
 }
 
 

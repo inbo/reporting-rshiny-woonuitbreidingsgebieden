@@ -101,6 +101,44 @@ shinyServer(function(input, output) {
         create_radar(esd_data(), input$ref)
         })
 
+    observeEvent(input$esd_legend, {
+        showModal(modalDialog(footer = modalButton("Sluiten"),
+            title = "Legende",
+            strong("Voedsel"),
+            p("Productie van plantaardige en dierlijke organismen die rechtstreeks of onrechtstreeks (via omzetting van voeder naar vlees, melk en eieren) gebruikt worden voor het voorzien in de menselijke behoeften."),
+            strong("Houtproductie"),
+            p("Productie van houtige biomassa voor het vervaardigen van industriële en huishoudelijke producten."),
+            strong("EnergieMaaisel"),
+            p("Productie van plantaardige biomassa die naar biogebaseerde brandstof omgezet kan worden of die rechtstreeks voor energieopwekking kan worden aangewend."),
+            strong("NabijGroen"),
+            p("De nabijheid van groene ruimte voor dagdagelijkse buitenactiviteiten in de woon- en werkomgeving."),
+            strong("Bestuiving"),
+            p("Bestuiving van bestuivingsafhankelijke teelten door wilde insecten."),
+            strong("Erosiecontrole"),
+            p("Het verminderen van bodemerosie door water en wind in erosiegevoelige gebieden door vegetatie."),
+            strong("Bodemvruchtbaarheid"),
+            p("Behoud van het vermogen in van de bodem om planten van de nodige voedingsstoffen, water en lucht te voorzien voor hun groei en bloei."),
+            strong("Globaal klimaat_bodem"),
+            p("Het verlagen van de atmosferische concentratie van het broeikasgas koolstofdioxide door koolstof vast te leggen in bodem."),
+            strong("Globaal klimaat_hout"),
+            p("Het verlagen van de atmosferische concentratie van het broeikasgas koolstofdioxide door koolstof vast te leggen in vegetatie."),
+            strong("Geluidsregulatie"),
+            p("Regulatie van geluidsoverlast via fysische en psychologische effecten van vegetatie en landschapselementen op geluidsperceptie."),
+            strong("Luchtzuivering"),
+            p("Afvang van fijn stof en gasvormige polluenten door vegetatie via de processen van droge en natte depositie."),
+            strong("Lokaal klimaat"),
+            p("Het milderend effect van vegetatie en wateroppervlakte op extreme temperaturen in stedelijk gebied."),
+            strong("Waterzuivering"),
+            p("Regulatie van de kwaliteit van het water dat door de mens wordt gebruikt, door verwijdering van stikstof in oppervlaktewater en ecosystemen met ondiep grondwater."),
+            strong("Grondwaterproductie"),
+            p("Geschiktheid voor de aanvulling van diepe grondwaterlagen (infiltratie) en dus voor de productie van grondwater van goede kwaliteit voor menselijk gebruik."),
+            strong("Komberging"),
+            p("Het onder controle houden van het overstromingsrisico door het (tijdelijk) bergen van water in overstroombare ecosystemen in valleigebieden."),
+            strong("Retentie"),
+            p("Het onder controle houden van het overstromingsrisico door het vasthouden van water.")
+        ))
+    })
+
     # Provide current WUG
     output$wug_display <- renderText({
         base_string <- "Ecosysteemdiensten WUG"

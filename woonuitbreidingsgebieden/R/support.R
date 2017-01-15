@@ -29,6 +29,21 @@ inbo.steun.donkerroos <- rgb(132, 56, 96, maxColorValue = 255)
 inbo.grijs <- rgb(142, 157, 167, maxColorValue = 255)
 vl.grey6 <- rgb(73, 73, 73, maxColorValue = 255)
 
+esd_names_orig <- c("Voedsel", "Houtprod", "EnergieMaaisel",
+                    "NabijGroen", "Bestuiving", "Erosie",
+                    "Bodemvrucht", "Copslag_bodem", "Copslag_hout",
+                    "Geluidsregulatie", "Luchtzuivering", "UHI",
+                    "Denitrificatie", "DiepGrondwater", "Komberging NOG",
+                    "Retentie")
+
+esd_names_plot <- c("Voedsel", "Houtproductie", "EnergieMaaisel",
+                    "NabijGroen", "Bestuiving", "Erosiecontrole",
+                    "Bodemvruchtbaarheid", "Globaal klimaat_bodem",
+                    "Globaal klimaat_hout", "Geluidsregulatie",
+                    "Luchtzuivering", "Lokaal klimaat" ,
+                    "Waterzuivering", "Grondwaterproductie", "Komberging",
+                    "Retentie")
+
 #' get from link-table containing an overview of the WUG-NR - Provincie -
 #' GEMEENTE relation the corresponding province and municipality based on the
 #' WUG identifier

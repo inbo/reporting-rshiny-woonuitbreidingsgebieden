@@ -26,10 +26,18 @@ get_esd_data <- function(esd_data, wug_link_data, id_wug){
                                location_info[5,])
     location_info$type <- c("wug", "provincie", "gemeente", "vlaanderen",
                             "wug_provincie", "wug_gemeente", "wug_vlaanderen")
-    location_info %>%
+    esd_data <- location_info %>%
         left_join(y = esd_data, by = c("ID", "type")) %>%
         select_("category", "type", "value") %>%
-        rename_(ESD = "category")
+        rename_(ESD = "category") %>%
+        mutate("ESD" = mapvalues(ESD,
+                                 esd_names_orig,
+                                 esd_names_plot))
+
+    esd_data$ESD <- factor(esd_data$ESD,
+                           levels = esd_names_plot ,
+                           ordered = TRUE)
+    return(esd_data)
 }
 
 #' Collect the ESD data for a given WUG from the excel-sheet:
@@ -106,15 +114,13 @@ get_esd_data_excel <- function(xls_file, id_wug){
     # combine to a single data table
     esd_data <- bind_rows(wug, gemeente, vlaanderen, wug_gemeente,
                           wug_provincie, wug_vlaanderen)
-    esd_data <- gather(esd_data, ESD, value, -type)
+    esd_data <- gather(esd_data, ESD, value, -type) %>%
+        mutate("ESD" = mapvalues(ESD,
+                                 esd_names_orig,
+                                 esd_names_plot))
 
     esd_data$ESD <- factor(esd_data$ESD,
-                           levels = c("Voedsel", "Houtprod", "EnergieMaaisel",
-                                      "NabijGroen", "Bestuiving", "Erosie",
-                                      "Bodemvrucht", "Copslag_bodem", "Copslag_hout",
-                                      "Geluidsregulatie", "Luchtzuivering", "UHI",
-                                      "Denitrificatie", "DiepGrondwater", "Komberging NOG",
-                                      "Retentie"),
+                           levels = esd_names_plot,
                            ordered = TRUE)
 
     return(esd_data)

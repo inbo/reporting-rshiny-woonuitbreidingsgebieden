@@ -2,27 +2,21 @@
 % Please edit documentation in R/get_landuse_data.R
 \name{get_landuse_data_ha}
 \alias{get_landuse_data_ha}
-\title{Collect the  LANDUSE data for a given WUG from the excel-sheet in ha:
-TABLE:
- - LG_WUG_\% -> row id_wug, col B:S
- - LG_Gemeenten_\% -> row GEMEENTE, col B:S
- - LG_Provincies_\% -> row Provincie, col B:S}
+\title{Collect the ha landuse data for a given WUG from tidy data}
 \usage{
-get_landuse_data_ha(xls_file, id_wug)
+get_landuse_data_ha(lu_data, wug_link_data, id_wug)
 }
 \arguments{
-\item{xls_file}{excel file}
+\item{lu_data}{tidy representation of all landuse data}
 
-\item{id_wug}{char wug identifier}
+\item{wug_link_data}{tidy version of link table wug/municipality/province}
+
+\item{id_wug}{wug identifier to get data from}
 }
 \value{
-data.frame
+wug_ha
 }
 \description{
-Collect the  LANDUSE data for a given WUG from the excel-sheet in ha:
-TABLE:
- - LG_WUG_\% -> row id_wug, col B:S
- - LG_Gemeenten_\% -> row GEMEENTE, col B:S
- - LG_Provincies_\% -> row Provincie, col B:S
+Collect the ha landuse data for a given WUG from tidy data
 }
 

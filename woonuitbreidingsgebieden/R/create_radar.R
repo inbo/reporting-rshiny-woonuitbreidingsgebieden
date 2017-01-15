@@ -25,38 +25,55 @@ create_radar <- function(ESD_data, reference,
 
     current_sel <- ESD_data %>%
         spread_(key = "type", value = "value") %>%
-        mutate_("threshold" = thresh) %>%
-        select_("ESD", "wug", reference, "threshold") %>%
+        mutate_("Threshold" = thresh) %>%
+        select_("ESD", "wug", reference, "Threshold") %>%
         gather(key, value, -ESD) %>%
         mutate(value = round(value, 2)) %>%
         spread_(key = "ESD", value = "value") %>%
         mutate(key = factor(key, levels = c(reference,
                                             "wug",
-                                            "threshold"),
+                                            "Threshold"),
                             ordered = TRUE))
+    current_sel <- current_sel %>%
+        mutate("key" = plyr::mapvalues(key,
+                                    c("wug",
+                                      "gemeente",
+                                      "provincie",
+                                      "vlaanderen",
+                                      "wug_provincie",
+                                      "wug_gemeente",
+                                      "wug_vlaanderen"),
+                                    c("WUG",
+                                      "Gemeente",
+                                      "Provincie",
+                                      "Vlaanderen",
+                                      "WUG Provincie",
+                                      "WUG Gemeente",
+                                      "WUG Vlaanderen"),
+                                    warn_missing = FALSE))
 
     colors <- c("#31a354", "#d95f0e", "#800000")
 
     ggradar(plot.data = current_sel,
-            base.text.size = base.text.size,
-            grid.label.values = c(0, 0.5, 1),
-            plot.extent.x.sf = 1.2,
-            plot.extent.y.sf = 1.3,
-            axis.label.size = 5,
-            axis.label.offset = 1.1,
-            group.point.size = 2,
-            group.line.width = 0.5,
-            group.linecolors = colors,
-            axis.label.colour = inbo.steun.donkerroos,
-            grid.line.colour = 'grey',
-            grid.line.alpha = 0.5,
-            grid.label.size = 6,
-            grid.label.colour = inbo.grijs,
-            background.circle.colour = 'grey',
-            background.circle.transparency = 0.1,
-            plot.legend = TRUE,
-            legend.text.size = 12,
-            legend.text.colour = inbo.steun.donkerroos)
+             base.text.size = base.text.size,
+             grid.label.values = c(0, 0.5, 1),
+             plot.extent.x.sf = 1.2,
+             plot.extent.y.sf = 1.3,
+             axis.label.size = 5,
+             axis.label.offset = 1.1,
+             group.point.size = 2,
+             group.line.width = 0.5,
+             group.linecolors = colors,
+             axis.label.colour = inbo.steun.donkerroos,
+             grid.line.colour = 'grey',
+             grid.line.alpha = 0.5,
+             grid.label.size = 6,
+             grid.label.colour = inbo.grijs,
+             background.circle.colour = 'grey',
+             background.circle.transparency = 0.1,
+             plot.legend = TRUE,
+             legend.text.size = 12,
+             legend.text.colour = inbo.steun.donkerroos)
 }
 
 

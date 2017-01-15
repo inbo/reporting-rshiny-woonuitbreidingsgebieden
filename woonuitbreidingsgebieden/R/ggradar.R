@@ -138,7 +138,7 @@ ggradar <- function(plot.data,
         graphData #data frame returned by function
     }
 
-    CaclulateAxisPath = function(var.names,min,max) {
+    CalculateAxisPath = function(var.names, mini, maxi) {
         # Calculates x-y coordinates for a set of radial axes (one per variable
         # being plotted in radar plot)
         #Args:
@@ -150,19 +150,19 @@ ggradar <- function(plot.data,
         #Cacluate required number of angles (in radians)
         angles <- seq(from = 0, to = 2*pi, by = (2*pi)/n.vars)
         #calculate vectors of min and max x+y coords
-        min.x <- min*sin(angles)
-        min.y <- min*cos(angles)
-        max.x <- max*sin(angles)
-        max.y <- max*cos(angles)
+        mini.x <- mini*sin(angles)
+        mini.y <- mini*cos(angles)
+        maxi.x <- maxi*sin(angles)
+        maxi.y <- maxi*cos(angles)
         #Combine into a set of uniquely numbered paths (one per variable)
         axisData <- NULL
         for (i in 1:n.vars) {
-            a <- c(i,min.x[i],min.y[i])
-            b <- c(i,max.x[i],max.y[i])
-            axisData <- rbind(axisData,a,b)
+            a <- c(i, mini.x[i], mini.y[i])
+            b <- c(i, maxi.x[i], maxi.y[i])
+            axisData <- rbind(axisData, a, b)
         }
         #Add column names + set row names = row no. to allow conversion into a data frame
-        colnames(axisData) <- c("axis.no","x","y")
+        colnames(axisData) <- c("axis.no", "x", "y")
         rownames(axisData) <- seq(1:nrow(axisData))
         #Return calculated axis paths
         as.data.frame(axisData)
@@ -192,16 +192,15 @@ ggradar <- function(plot.data,
 
     # (c) Calculate coordinates required to plot radial variable axes
     axis <- NULL
-    axis$path <- CaclulateAxisPath(var.names,
+    axis$path <- CalculateAxisPath(var.names,
                                    grid.min + abs(centre.y),
                                    grid.max + abs(centre.y))
 
     # (d) Create file containing axis labels + associated plotting coordinates
     # labels
-    axis$label <- data.frame(
-        text = axis.labels,
-        x = NA,
-        y = NA )
+    axis$label <- data.frame("text" = axis.labels,
+                             "x" = NA,
+                             "y" = NA )
 
     #axis label coordinates
     n.vars <- length(var.names)
@@ -214,7 +213,7 @@ ggradar <- function(plot.data,
                             abs(centre.y))*axis.label.offset)*cos(angles[i])})
 
     # (e) Create Circular grid-lines + labels
-    # calculate the cooridinates required to plot circular grid-lines
+    # calculate the coordinates required to plot circular grid-lines
     # for three user-specified
     # y-axis values: min, mid and max [grid.min; grid.mid; grid.max]
     gridline <- NULL

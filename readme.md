@@ -14,6 +14,14 @@ As the application is in a `dev` environment, the instance is stopped each night
 
 This service calls the [startapp.sh](https://github.com/inbo/woonuitbreidingsgebieden/blob/master/systemd/startapp.sh) file in the ubuntu home directory when the EC2 instance is started.
 
+## Troubeshooting
+
+If you want to check on the EC2 how the Rshiny App inside the Docker is running (without the shinyproxy) wrap:
+
+```
+sudo docker run -p 3838:3838 wug1 R -e 'woonuitbreidingsgebieden::run_wug()'
+```
+
 ### Acknowledgements
 We would like to thank [openanalytics](https://www.openanalytics.eu/) to open source their shinyproxy application, which enabled us to bring the Rshiny application to the web. 
 

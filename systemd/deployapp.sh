@@ -1,7 +1,7 @@
 #
 # Current basic deployment for the shinyproxy application
 # 
-# All code is provided in the github repo, so all changes should be done from their
+# All code is provided in the github repo, so all changes should be done from there
 # 
 # Remark: there is also a startup service running, as the rundeck environment closes
 # dev/uat machines every night. This does not a full deployment, only starts the 

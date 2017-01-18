@@ -1,0 +1,12 @@
+[Unit]
+Description=Running the shinyproxy woongebieden application on reboot
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/woonuitbreidingsgebieden/scripts
+ExecStart=/home/ubuntu/woonuitbreidingsgebieden/scripts/startshiny.sh
+
+[Install]
+WantedBy=multi-user.target
+

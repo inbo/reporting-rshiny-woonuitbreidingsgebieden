@@ -14,7 +14,7 @@ hooks:
     - location: scripts/startshiny.sh
       timeout: 60
 permissions:
-  - object: /home/ubuntu
+  - object: /home/ubuntu/woonuitbreidingsgebieden
     owner: ubuntu
     group: ubuntu
-    mode: 664
+    mode: 764

@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/woonuitbreidingsgebieden
+hooks:
+  AfterInstall:
+    - location: woonuitbreidingsgebieden.sh
+      timeout: 500
+permissions:
+  - object: /home/ubuntu
+    owner: ubuntu
+    group: ubuntu
+    mode: 664

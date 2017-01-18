@@ -1,0 +1,17 @@
+#!/bin/bash
+# Woonuitbreidingsgebieden
+#
+
+case $1 in
+    start)
+        /bin/bash /home/ubuntu/woonuitbreidingsgebieden/scripts/startshiny.sh
+    ;;
+    stop)
+        /bin/bash /home/ubuntu/woonuitbreidingsgebieden/scripts/stopshiny.sh
+    ;;
+    restart)
+        /bin/bash /home/ubuntu/woonuitbreidingsgebieden/scripts/stopshiny.sh
+        /bin/bash /home/ubuntu/woonuitbreidingsgebieden/scripts/startshiny.sh
+    ;;
+esac
+exit 0

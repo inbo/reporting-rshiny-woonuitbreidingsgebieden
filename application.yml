@@ -1,7 +1,7 @@
 shiny:
   proxy:
-    title: Research Institute for Nature and Forest (INBO)
-    logo-url: http://data.inbo.be/ipt/logo.do?r=broedvogel-atlas-occurrences
+    title: Instituut voor Natuur- en Bosonderzoek (INBO) 
+    logo-url: https://www.inbo.be/sites/all/themes/bootstrap_inbo/img/inbo/logo.png 
     landing-page: /
     heartbeat-rate: 10000
     heartbeat-timeout: 60000

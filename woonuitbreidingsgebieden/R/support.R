@@ -36,10 +36,10 @@ esd_names_orig <- c("Voedsel", "Houtprod", "EnergieMaaisel",
                     "Denitrificatie", "DiepGrondwater", "Komberging NOG",
                     "Retentie")
 
-esd_names_plot <- c("Voedsel", "Houtproductie", "EnergieMaaisel",
-                    "NabijGroen", "Bestuiving", "Erosiecontrole",
-                    "Bodemvruchtbaarheid", "Globaal klimaat_bodem",
-                    "Globaal klimaat_hout", "Geluidsregulatie",
+esd_names_plot <- c("Voedsel", "Houtproductie", "Energie uit maaisel",
+                    "Nabij groen", "Bestuiving", "Erosiecontrole",
+                    "Bodemvruchtbaarheid", "Globaal klimaat bodem",
+                    "Globaal klimaat hout", "Geluidsregulatie",
                     "Luchtzuivering", "Lokaal klimaat" ,
                     "Waterzuivering", "Grondwaterproductie", "Komberging",
                     "Retentie")

@@ -11,4 +11,5 @@ if [ -f woonuitbreidingsgebieden.tar.gz ]; then
 fi
 tar -zcvf woonuitbreidingsgebieden.tar.gz woonuitbreidingsgebieden
 # Build the docker image
+cd /home/ubuntu
 sudo docker build -t wug1 .

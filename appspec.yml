@@ -4,15 +4,9 @@ files:
   - source: /
     destination: /home/ubuntu/woonuitbreidingsgebieden
 hooks:
-  ApplicationStop:
-    - location: scripts/stopshiny.sh
-      timeout: 60
   AfterInstall:
     - location: scripts/woonuitbreidingsgebieden.sh
       timeout: 1000
-  ApplicationStart:
-    - location: scripts/startshiny.sh
-      timeout: 60
 permissions:
   - object: /home/ubuntu/woonuitbreidingsgebieden
     owner: ubuntu

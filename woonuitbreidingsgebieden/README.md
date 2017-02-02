@@ -14,7 +14,16 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
 
 In this document, a short overview of the functions developed to make the WUG Rshiny application are showcased, as they can be used outside the scope of the application as well. For example, when making reports or doing other data analysis.
 
-The different are organised in a package:
+As the package is not available on CRAN, the easiest way of installing the package is using the `devtools` package and referring to the git repository holding the package code:
+
+```
+devtools::install_github("inbo/woonuitbreidingsgebieden", 
+                         subdir = "woonuitbreidingsgebieden",
+                         auth_token= MYTOKEN)
+```
+with MYTOKEN, the token as you will receive it from Github, using [the guidelines]( https://github.com/settings/tokens). Remark also that the package itself is stored in a subfolder of the repository, which is tackled by the `subdir` command.
+
+One installed, the functionalities can be derived by loading the package:
 
 ```{r loadfun}
 library("woonuitbreidingsgebieden")

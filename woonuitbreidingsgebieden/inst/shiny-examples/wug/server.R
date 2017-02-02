@@ -15,7 +15,7 @@ print(getwd())
 #xls_file <- paste(system.file('extdata', package = 'woonuitbreidingsgebieden'),
 #                  'Afwegingskader_Wug.xlsx', sep = '/')
 
-xls_file <- "../../extdata/Afwegingskader_Wug_versie2_verbeterd.xlsx"
+xls_file <- "../../extdata/Afwegingskader_Wug.xlsx"
 
 # extract data -> info lists about current excel extraction
 esd_columns <- c("Voedsel", "Houtprod", "EnergieMaaisel",

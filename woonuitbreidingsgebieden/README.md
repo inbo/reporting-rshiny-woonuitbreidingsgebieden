@@ -29,9 +29,9 @@ One installed, the functionalities can be derived by loading the package:
 library("woonuitbreidingsgebieden")
 ```
 
-On the one hand, the `get_*` functions are created to extract the data from the data source (excel-file). On the other hand, the `create_*` functions are used to make the graphs. The `support.R` script provide some additional help functions.
+On the one hand, the `extract_*` functions are created to extract the data for all WUG ids from the data source (excel-file). The `get_*` functions are created to extract the data for a single wug (either from the loaded data or directly from the excel-file). On the other hand, the `create_*` functions are used to make the graphs. The `support.R` script provide some additional help functions. 
 
-The individual functions operate on a single WUG, based on the WUG code. For a given WUG code, the data can be extracted (in a tidy structure) and consecutively, the graphs can be made. The structuring of the data as a tidy format supports easy handling with e.g. `ggplot2`.
+The plot functions operate on a single WUG, based on the WUG code. For a given WUG code, the data can be extracted (in a tidy structure) and consecutively, the graphs can be made for that WUG. The structuring of the data as a tidy format supports easy handling with e.g. `ggplot2`.
 
 In this tutorial, we will use the WUG `11002_08` to illustrate the functions.
 
@@ -47,7 +47,7 @@ xls_file <- "inst/extdata/Afwegingskader_Wug.xlsx"
 To create the landuse plot, load the landuse data as percentages:
 
 ```{r landuse_load_pt}
-lu_data <- get_landuse_data_pt(xls_file, id_wug)
+lu_data <- get_landuse_data_pt_excel(xls_file, id_wug)
 ```
 
 and create the graph:

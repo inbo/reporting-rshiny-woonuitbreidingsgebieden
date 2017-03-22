@@ -6,10 +6,9 @@ In this document, a short overview of the functions developed to make the WUG Rs
 As the package is not available on CRAN, the easiest way of installing the package is using the `devtools` package and referring to the git repository holding the package code:
 
     devtools::install_github("inbo/woonuitbreidingsgebieden", 
-                             subdir = "woonuitbreidingsgebieden",
-                             auth_token= MYTOKEN)
+                             subdir = "woonuitbreidingsgebieden")
 
-with MYTOKEN, the token as you will receive it from Github, using [the guidelines](https://github.com/settings/tokens). Remark also that the package itself is stored in a subfolder of the repository, which is tackled by the `subdir` command.
+Remark that the package itself is stored in a subfolder of the repository, which is tackled by the `subdir` command.
 
 One installed, the functionalities can be derived by loading the package:
 
@@ -30,7 +29,7 @@ Both methods will be described in this tutorial, referred to as *single WUG* (1)
 
 ``` r
 id_wug <- "11002_08"
-xls_file <- "inst/extdata/Afwegingskader_Wug.xlsx"
+xls_file <- "Afwegingskader_Wug.xlsx" # Location of the excel file with the source data
 ```
 
 Single WUG

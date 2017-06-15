@@ -26,6 +26,12 @@ If you want to check on the EC2 how the Rshiny App inside the Docker is running 
 sudo docker run -p 3838:3838 wug1 R -e 'woonuitbreidingsgebieden::run_wug()'
 ```
 
+In a similar way, specific R functions can be tested as well. Remember that the data is ported as part of the R-package and stored as such on the Docker:
+
+```
+sudo docker run -p 3838:3838 wug1 R -e 'appDir <- system.file("shiny-examples", "wug", package = "woonuitbreidingsgebieden");setwd(appDir);library(woonuitbreidingsgebieden);xls_file <- "../../extdata/Afwegingskader_Wug.xlsx";wug_link_data <- extract_link_table(xls_file, "Info_Wug");id_wug <- "11002_08";lu_data <- get_landuse_data_pt_excel(xls_file, id_wug);create_stacked_bar(lu_data)'
+```
+
 ### Acknowledgements
 We would like to thank [openanalytics](https://www.openanalytics.eu/) to open source their shinyproxy application, which enabled us to bring the Rshiny application to the web. 
 

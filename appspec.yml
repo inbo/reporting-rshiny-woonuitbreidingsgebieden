@@ -4,6 +4,9 @@ files:
   - source: /
     destination: /home/ubuntu/woonuitbreidingsgebieden
 hooks:
+  BeforeInstall:
+    - location: rm -rf /home/ubuntu/woonuitbreidingsgebieden
+      timeout: 300
   AfterInstall:
     - location: scripts/woonuitbreidingsgebieden.sh
       timeout: 3600

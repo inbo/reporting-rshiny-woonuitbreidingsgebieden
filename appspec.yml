@@ -5,7 +5,7 @@ files:
     destination: /home/ubuntu/woonuitbreidingsgebieden
 hooks:
   BeforeInstall:
-    - location: rm -rf /home/ubuntu/woonuitbreidingsgebieden
+    - location: scripts/cleanup-woonuitbreidingsgebieden.sh
       timeout: 300
   AfterInstall:
     - location: scripts/woonuitbreidingsgebieden.sh
